@@ -1,0 +1,13 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #392b58;
+  h1 {
+    display: inline;
+    width: 100%;
+    font-family: sans-serif;
+    color: #D4EDE8;
+  }
+}
