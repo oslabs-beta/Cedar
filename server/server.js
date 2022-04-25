@@ -11,11 +11,20 @@ const PORT = 3000;
 app.use(express.json());
 
 // ~~~~~~~~~~~~~~~~~~~~~STATIC FILES~~~~~~~~~~~~~~~~~~~~~ //
-app.use(express.static(path.join(__dirname, '../')))
 
 // ~~~~~~~~~~~~~~~~~~~~~ROUTES FOR ROUTERS~~~~~~~~~~~~~~~~~~~~~ //
 
 // ~~~~~~~~~~~~~~~~~~~~~OTHER ROUTES~~~~~~~~~~~~~~~~~~~~~ //
+// Production app entry:
+//    serve index.js as static file
+//    serve index.html app entry
+if(process.env.NODE_ENV === 'production'){
+  app.use('/build', express.static(path.join(__dirname, '../build')));
+  // serve index.html on the route '/'
+  app.get('/', (req, res) => {
+    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+  })
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~404 & ERROR HANDLING~~~~~~~~~~~~~~~~~~~~~ //
 app.use('*', (req, res) => {

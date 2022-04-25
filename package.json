@@ -12,7 +12,7 @@
   "nodemonConfig": {
     "ignore": [
       "build",
-      "client"
+      "src"
     ]
   },
   "author": "Larissa Ciancarelli, Mireille Crocco, Jonah Eidman, Carly Yarnell",
