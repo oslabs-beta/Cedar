@@ -18,6 +18,9 @@
   "author": "Larissa Ciancarelli, Mireille Crocco, Jonah Eidman, Carly Yarnell",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-cloudwatch": "^3.78.0",
+    "@aws-sdk/client-cloudwatch-logs": "^3.78.0",
+    "@aws-sdk/client-lambda": "^3.78.0",
     "@reduxjs/toolkit": "^1.8.1",
     "express": "^4.17.3",
     "pg": "^8.7.3",
