@@ -6,6 +6,7 @@ const app = express();
 const PORT = 3000;
 
 // ~~~~~~~~~~~~~~~~~~~~~REQUIRE ROUTERS~~~~~~~~~~~~~~~~~~~~~ //
+const userRouter = require(path.join(__dirname, './routes/userRouter.js'));
 
 // ~~~~~~~~~~~~~~~~~~~~~PARSE REQUESTS~~~~~~~~~~~~~~~~~~~~~ //
 app.use(express.json());
@@ -13,6 +14,7 @@ app.use(express.json());
 // ~~~~~~~~~~~~~~~~~~~~~STATIC FILES~~~~~~~~~~~~~~~~~~~~~ //
 
 // ~~~~~~~~~~~~~~~~~~~~~ROUTES FOR ROUTERS~~~~~~~~~~~~~~~~~~~~~ //
+app.use('/user', userRouter);
 
 // ~~~~~~~~~~~~~~~~~~~~~OTHER ROUTES~~~~~~~~~~~~~~~~~~~~~ //
 // Production app entry:
