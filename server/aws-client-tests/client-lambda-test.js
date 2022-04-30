@@ -10,6 +10,9 @@ const creds = {
   }
 };
 
+
+
+
 const lambdaClient = new LambdaClient(creds);
 
 const commandParams = { 
@@ -26,4 +29,4 @@ const getFunctions = async() => {
   }
 }
 
-getFunctions();
+// getFunctions();
