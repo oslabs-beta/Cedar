@@ -10,13 +10,14 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const creds = {
-    region: process.env.AWS_REGION.slice(2),
+    region: process.env.AWS_REGION,
     credentials: {
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   	}
   };
 
+  //console.log(creds)
 //declare client passing in credentials from above
 const metricClient = new CloudWatchClient(creds);
 const end = Date.now()
@@ -28,6 +29,7 @@ const params = {
   StartTime: new Date(start),
   LabelOptions: {
     // -0400 represents 4 hours and 0 minutes behind UTC, probably should not be hardcoded
+    //maybe we can use the aws_region to specify the correct timezone 
     Timezone: '-0400', 
   },
   MetricDataQueries: [
@@ -105,4 +107,4 @@ const sendCommand = async () => {
   }
 }
 
-sendCommand();
+console.log(sendCommand());
