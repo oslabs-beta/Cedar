@@ -1,4 +1,5 @@
 const express = require('express');
+const { ModuleFilenameHelpers } = require('webpack');
 const router = express.Router();
 const userController = require('../controllers/userController')
 
@@ -9,3 +10,5 @@ router.post('/login', userController.login, (req, res) => {
 router.post('signup', userController.signUp, (req, res) => {
   res.redirect('/login');
 });
+
+module.exports = router;

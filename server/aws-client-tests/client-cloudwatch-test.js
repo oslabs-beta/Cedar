@@ -10,7 +10,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const creds = {
-    region: process.env.AWS_REGION,
+    region: process.env.AWS_REGION.slice(2),
     credentials: {
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -96,11 +96,12 @@ const sendCommand = async () => {
     console.log('u did it lol');
     console.log(data);
     console.log(data.MetricDataResults[0].Timestamps);
-    console.log(data.MetricDataResults[0].Values);
-    console.log(data.MetricDataResults[1].Timestamps);
-    console.log(data.MetricDataResults[1].Values);
-    console.log(data.MetricDataResults[2].Timestamps);
-    console.log(data.MetricDataResults[2].Values);
+    console.log(Date.parse(JSON.parse(JSON.stringify(data.MetricDataResults[0].Timestamps[0]))));
+    // console.log(data.MetricDataResults[0].Values);
+    // console.log(data.MetricDataResults[1].Timestamps);
+    // console.log(data.MetricDataResults[1].Values);
+    // console.log(data.MetricDataResults[2].Timestamps);
+    // console.log(data.MetricDataResults[2].Values);
   } catch (err) {
     console.log('error ):');
     console.log(err);

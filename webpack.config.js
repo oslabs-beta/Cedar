@@ -40,7 +40,7 @@ module.exports = {
       '/': 'http://localhost:3000'
     },
     historyApiFallback: {
-      index:'build/index.html'
+      index:'/'
   },
   },
   resolve: {
