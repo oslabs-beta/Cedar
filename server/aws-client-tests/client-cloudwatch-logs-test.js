@@ -14,7 +14,7 @@ const creds = {
   	}
   };
 
-
+// this is a new comment
 
 const cloudWatchLogsClient = new CloudWatchLogsClient(creds)
 
