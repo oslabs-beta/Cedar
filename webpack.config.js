@@ -33,15 +33,15 @@ module.exports = {
   },
   devServer: {
     static: {
-      publicPath: 'build',
-      directory: path.resolve(__dirname, 'build')
+      publicPath: '/',
+      directory: path.resolve(__dirname, 'src')
     },
     proxy: {
-      '/': 'http://localhost:3000'
+      '/api': 'http://localhost:3000'
     },
     historyApiFallback: {
       index:'/'
-  },
+    },
   },
   resolve: {
     // Enable importing JS / JSX files without specifying their extension

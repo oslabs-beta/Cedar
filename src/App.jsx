@@ -183,9 +183,9 @@ class App extends Component {
         {/* //   <h1>Welcome to Cedar!</h1> */}
         <ThemeProvider theme={ themeLight }>
           <CssBaseline />
-          <AppBar>
+          {/* <AppBar>
             <h5>home</h5>
-          </AppBar>
+          </AppBar> */}
           {/* <Lobby /> */}
           <Routes>
             <Route path="/" element={<Lobby />} />
