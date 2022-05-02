@@ -7,6 +7,7 @@ const PORT = 3000;
 
 // ~~~~~~~~~~~~~~~~~~~~~REQUIRE ROUTERS~~~~~~~~~~~~~~~~~~~~~ //
 const userRouter = require(path.join(__dirname, './routes/userRouter.js'));
+const awsRouter = require(path.join(__dirname, './routes/aws.js'));
 
 // ~~~~~~~~~~~~~~~~~~~~~PARSE REQUESTS~~~~~~~~~~~~~~~~~~~~~ //
 app.use(express.json());
@@ -15,6 +16,7 @@ app.use(express.json());
 
 // ~~~~~~~~~~~~~~~~~~~~~ROUTES FOR ROUTERS~~~~~~~~~~~~~~~~~~~~~ //
 app.use('/user', userRouter);
+app.use('/aws', awsRouter)
 
 // ~~~~~~~~~~~~~~~~~~~~~OTHER ROUTES~~~~~~~~~~~~~~~~~~~~~ //
 // Production app entry:
@@ -48,5 +50,5 @@ app.use((err, req, res, next) => {
 
 // ~~~~~~~~~~~~~~~~~~~~~TURN ON SERVER~~~~~~~~~~~~~~~~~~~~~ //
 app.listen(PORT, () => {
-  `Server listening on port ${PORT}`
+  console.log(`Server listening on port ${PORT}`);
 })

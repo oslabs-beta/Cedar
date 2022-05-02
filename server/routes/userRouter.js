@@ -1,7 +1,7 @@
 const express = require('express');
-const { ModuleFilenameHelpers } = require('webpack');
-const router = express.Router();
 const userController = require('../controllers/userController')
+
+const router = express.Router();
 
 router.post('/login', userController.login, (req, res) => {
   res.status(200).send('login successful');
