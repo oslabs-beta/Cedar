@@ -1,13 +1,32 @@
-body {
+// body {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: #392b58;
+//   h1 {
+//     display: inline;
+//     width: 100%;
+//     font-family: sans-serif;
+//     color: #D4EDE8;
+//   }
+// }
+
+body{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #392b58;
-  h1 {
-    display: inline;
-    width: 100%;
-    font-family: sans-serif;
-    color: #D4EDE8;
-  }
+  background-image: url('../images/WallpaperDog-10879441.jpg');
+  background-size: cover;
+}
+
+.homePage{
+  background-color: white;
+  // width: 500px;
+  // height: 500px;
+}
+
+.app2 {
+  background-color: white;
 }

@@ -40,8 +40,8 @@ module.exports = {
       '/': 'http://localhost:3000'
     },
     historyApiFallback: {
-      index: '/'
-    },
+      index:'/'
+  },
   },
   resolve: {
     // Enable importing JS / JSX files without specifying their extension
