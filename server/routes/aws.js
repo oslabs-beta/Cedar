@@ -10,8 +10,10 @@ router.get('/getFunctionNames', functionController.getFuncs, (req, res) => {
   res.status(200).json(res.locals.lambdaFuncs);
 })
 
-router.post('getMetricData')
+router.post('/getMetricData')
 
-router.post('/getLogsData')
+router.post('/getLogsData', logController.getLogs, (req, res) => {
+  res.status(200).json(res.locals.logs);
+});
 
 module.exports = router;

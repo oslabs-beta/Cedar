@@ -1,6 +1,5 @@
-
 const { LambdaClient, ListFunctionsCommand } = require('@aws-sdk/client-lambda');
-//dotenv is how we're getting our credentials
+//require dotenv so we can read the credentials stored in .env file
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -13,40 +12,49 @@ dotenv.config();
       }
   };
 
-const params = { FunctionVersion: 'ALL'}
-
-// initiate LambdaClient with credentials object
+// initiate a client as a new lambda client with credentials object
 const lambdaClient = new LambdaClient(creds);
 
-// initiate a command (object instance) with required input parameters
-const command = new ListFunctionsCommand(params);
-
+//this is what we will attatch middleware onto and export
 const functionController = {};
 
 functionController.getFuncs = async (req, res, next) => {
   try {
-    // call send method on the client with command object as the argument
-    const returnedData = await lambdaClient.send(command);
-    console.log('~~~~~SUCCESS!~~~~~');
-  
-    const funcArr = [];
-    returnedData.Functions.forEach(func => {
-      funcArr.push({ functionName: func.FunctionName });
-    })
 
-    res.locals.lambdaFuncs = funcArr;
+    const sendCommand = async(funcArr = [], nextToken = null) => {
+      //declare params 
+      const params = {
+        FunctionVersion: 'ALL',
+      };
+      //if a next token is provided, add it to the param obj
+      if (nextToken) params.nextMarker = nextToken;
+      
+      // initiate a command (object instance) with required input parameters
+      const command = new ListFunctionsCommand(params);
+
+      //send the command and attatch the response to a variable
+      const response = await lambdaClient.send(command);
+
+      //push functions into funcArr so we can either return the array or return
+      //or pass the array to the recursive call is there is a next token
+      response.Functions.forEach(func => {
+        funcArr.push({ functionName: func.FunctionName });
+      });
+
+      //check for next marker and recursively call the func if one exists,
+      //otherwise we just return the funcArr
+      return !response.nextMarker ? funcArr : sendCommand(funcArr, response.nextMarker);
+      };
+
+    //attatch the result of sendCommand invocation to res.locals
+    res.locals.lambdaFuncs = await sendCommand();
+    console.log('~~~SUCCESS~~~')
     return next();
-
-    //need a helper funciton for recursive calls
-    // ListFunctionsCommand will return up to 50 lambda functions 
-    // so we have to account for if there are more than 50 functions
-    // if (!returnedData.NextMarker){
-    //   res.locals.lambdaFuncs = returnedData.Functions;
-    // } else {
-    //   getFuncs(params = { FunctionVersion: 'ALL', Marker: returnedData.NextMarker }, funcArr);
-    // }
   } catch (err) {
-    console.log('~~~ERROR~~~', err);
+    return next({
+      log: 'An error occurren in functionController.getFuncs middleware',
+      message: {err: 'An error occurred while gathering lambda functions'}
+    })
   };
 };
 
