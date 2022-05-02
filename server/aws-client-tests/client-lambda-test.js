@@ -15,11 +15,15 @@ const creds = {
 
 const lambdaClient = new LambdaClient(creds);
 
-const commandParams = { 
-  FunctionVersion: 'ALL',
-};
+// const commandParams = { 
+//   FunctionVersion: 'ALL',
+// };
 
 const getFunctions = async() => {
+  const commandParams = { 
+    FunctionVersion: 'ALL',
+    Marker: null
+  };
   try {
     const functions = await lambdaClient.send(new ListFunctionsCommand(commandParams));
     console.log('~~~~~~~~~~SUCCESS!~~~~~~~~~~~');
@@ -29,4 +33,4 @@ const getFunctions = async() => {
   }
 }
 
-// getFunctions();
+getFunctions();
