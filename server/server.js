@@ -15,8 +15,8 @@ app.use(express.json());
 // ~~~~~~~~~~~~~~~~~~~~~STATIC FILES~~~~~~~~~~~~~~~~~~~~~ //
 
 // ~~~~~~~~~~~~~~~~~~~~~ROUTES FOR ROUTERS~~~~~~~~~~~~~~~~~~~~~ //
-app.use('/user', userRouter);
-app.use('/aws', awsRouter)
+app.use('/api/user', userRouter);
+app.use('/api/aws', awsRouter)
 
 // ~~~~~~~~~~~~~~~~~~~~~OTHER ROUTES~~~~~~~~~~~~~~~~~~~~~ //
 // Production app entry:
