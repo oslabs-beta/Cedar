@@ -20,22 +20,4 @@ const Home = () => {
   )
 }
 
-
-// class Home extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     color: "#007bff"
-  //   }
-  // }
-
-  // render(){
-  //   return(
-  //     <div className= "homePage">
-  // <Graph />
-  //     </div>
-  //   )
-  // }
-
-
 export default Home;

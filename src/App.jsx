@@ -1,11 +1,8 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Lobby from './components/Lobby';
-import { AppBar } from '@mui/material';
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-// import { withRouter } from 'react-router';
-// import { Route, Switch } from 'react-router-dom';
+//import { AppBar } from '@mui/material';
 import Signup from './components/Signup';
 import Home from './components/Home';
 import Logs from './components/Logs';
@@ -45,27 +42,56 @@ const themeDark = createTheme({
     },
   }
 });
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      isLoggedIn: false,
-      // theme: themeLight
-    };
-    // this.signupSubmit = this.signupSubmit.bind(this);
-    // this.loginSubmit = this.loginSubmit.bind(this);
-    // this.checkSession = this.checkSession.bind(this);
-    // this.logoutSubmit = this.logoutSubmit.bind(this);
-    // this.toggleMode = this.toggleMode.bind(this);
-  }
-
+const App = () => {
   
-//   componentDidMount() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [login, setLogin] = useState(false);
+  const [theme, setTheme] = useState(themeLight);
+  
+  return (
+    <>
+      <ThemeProvider theme={ themeLight }>
+        <CssBaseline />
+        {/* <AppBar>
+          <h5>home</h5>
+        </AppBar> */}
+        {/* <Lobby /> */}
+        <Routes>
+          <Route path="/" element={<Lobby />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/logs" element={<Logs />} />
+        </Routes>
+      </ThemeProvider>
+    </>
+    //  <CircularProgress/>
+    )
+  }
+  
+  
+export default App;
+  
+
+  // class App extends Component {
+  //   constructor(props) {
+  //     super(props);
+  //     this.state = {
+  //       email: '',
+  //       password: '',
+  //       firstName: '',
+  //       lastName: '',
+  //       isLoggedIn: false,
+  //       // theme: themeLight
+  //     };
+  //     // this.signupSubmit = this.signupSubmit.bind(this);
+  //     // this.loginSubmit = this.loginSubmit.bind(this);
+  //     // this.checkSession = this.checkSession.bind(this);
+  //     // this.logoutSubmit = this.logoutSubmit.bind(this);
+  //     // this.toggleMode = this.toggleMode.bind(this);
+  //   }
+  //   componentDidMount() {
 //     this.checkSession();
 //   }
 
@@ -176,29 +202,27 @@ class App extends Component {
 //     }
 //   }
 
-  render() {
+//   render() {
   
-    return (
-      <>
-        {/* //   <h1>Welcome to Cedar!</h1> */}
-        <ThemeProvider theme={ themeLight }>
-          <CssBaseline />
-          {/* <AppBar>
-            <h5>home</h5>
-          </AppBar> */}
-          {/* <Lobby /> */}
-          <Routes>
-            <Route path="/" element={<Lobby />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/logs" element={<Logs />} />
-          </Routes>
-        </ThemeProvider>
-      </>
-      //  <CircularProgress/>
-    )
-  }
-}
+//     return (
+//       <>
+//         {/* //   <h1>Welcome to Cedar!</h1> */}
+//         <ThemeProvider theme={ themeLight }>
+//           <CssBaseline />
+//           {/* <AppBar>
+//             <h5>home</h5>
+//           </AppBar> */}
+//           {/* <Lobby /> */}
+//           <Routes>
+//             <Route path="/" element={<Lobby />} />
+//             <Route path="/home" element={<Home />} />
+//             <Route path="/logs" element={<Logs />} />
+//           </Routes>
+//         </ThemeProvider>
+//       </>
+//       //  <CircularProgress/>
+//     )
+//   }
+// }
 
 //functionality: pass the login/signup functions down as props, comment in the functions and binding 
-
-export default App;

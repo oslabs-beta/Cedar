@@ -1,21 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
+import { useNavigate } from 'react-router';
+import { Button } from '@mui/material';
 
 const Logs = () => {
+  const navigate = useNavigate();
+  const handleBackClick = useCallback(() => navigate('/home', {replace: true}), [navigate]);
   return(
-    <h1>ello</h1>
+    <Button variant="contained" color= 'secondary' onClick= {handleBackClick} >Return Home</Button>
   )
 }
-
-// class Logs extends Component {
-//   constructor(props){
-//     super(props);
-//   }
-
-//   render(){
-//     return(
-//       <h1>ello</h1>
-//     )
-//   }
-// }
 
 export default Logs;
