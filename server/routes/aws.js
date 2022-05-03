@@ -8,9 +8,11 @@ const router = express.Router();
 
 router.get('/getFunctionNames', functionController.getFuncs, (req, res) => {
   res.status(200).json(res.locals.lambdaFuncs);
-})
+});
 
-router.post('/getMetricData')
+router.post('/getMetricData', metricController.getMetrics, (req, res) => {
+  res.status(200).json(res.locals.metricsData);
+});
 
 router.post('/getLogsData', logController.getLogs, (req, res) => {
   res.status(200).json(res.locals.logs);
