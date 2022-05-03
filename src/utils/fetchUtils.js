@@ -9,8 +9,14 @@ export const getFuncs = async (setFunctionData) => {
   try {
     const data = await fetch('/api/aws/getFunctionNames');
     const parsedData = await data.json();
-    setFunctionData(parsedData);
-    return parsedData;
+    setFunctionData(parsedData.map(func => { 
+      return {
+      ...func,
+      metrics: null,
+      logs: null
+        }
+      })
+    );
   } catch (err) {
     console.log(err);
   }
