@@ -13,10 +13,12 @@ const PERIODS = {
   'Custom': null
 }
 
-const chooseMetrics = (props) => {
+const DataSelectionContainer = (props) => {
   return (
     <>
       <h1>Metric options will go here</h1>
     </>
   )
 }
+
+export default DataSelectionContainer;
