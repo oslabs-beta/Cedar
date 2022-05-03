@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Grid, Paper, Button, AppBar } from '@mui/material';
 import Signup from './Signup';
 
-const Lobby = () => {
+const Lobby = (props) => {
     const paperStyle = {padding: 30, height: '45vh auto', width:300, margin: '10px auto', opacity: 0.75}
     const [ signUp, setSignup ] = useState(false);
     const navigate = useNavigate();
