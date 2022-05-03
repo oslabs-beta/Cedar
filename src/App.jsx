@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Lobby from './components/Lobby';
@@ -10,6 +10,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { getFuncs } from "./utils/fetchUtils";
 
 
 // ***Considering stashing this in a separate file
@@ -50,7 +51,21 @@ const App = () => {
   const [lastName, setLastName] = useState('');
   const [login, setLogin] = useState(false);
   const [theme, setTheme] = useState(themeLight);
-  
+
+  const [functionData, setFunctionData] = useState([]);
+  const [functionNames, setFunctionNames] = useState([]);
+
+  useEffect(() => {
+    setFunctionData(getFuncs(setFunctionData));
+  }, []);
+
+  useEffect(() => {
+    if(functionData.length > 0) setFunctionNames(functionData.map(func => func.functionName));
+  }, [functionData]);
+ 
+
+
+
   return (
     <>
       <ThemeProvider theme={ themeLight }>
@@ -61,7 +76,7 @@ const App = () => {
         {/* <Lobby /> */}
         <Routes>
           <Route path="/" element={<Lobby />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<Home funcNames={functionNames} />} />
           <Route path="/logs" element={<Logs />} />
         </Routes>
       </ThemeProvider>
