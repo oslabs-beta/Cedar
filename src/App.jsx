@@ -44,11 +44,47 @@ const themeDark = createTheme({
   }
 });
 
+// old state [{}, {},  {}]
+// new state = oldstate.map(
+  // if function not being updated, return function
+  // if it is being updated
+  // updatedFunc = {
+  //   ...oldFunc
+  //   timestamps: new timestamps from DB + existing ones
+  //   values: new values from DB + existing ones
+  // }
+//)
+// find index of funcion in old state fnInd
+// oldState[fnInd].metrics.Invocations.values = new + old values
+
 /** TODO
- * set login state to true upon user logging in
+ * App + Login: set login state to true upon user logging in
  * * Today's MVP: state is set to true immediately upon pushing the button
- * Logging in takes user to /home (done)
- * getting function names (getFuncs) should depend on login state and should only fire if login is true
+ * * Logging in takes user to /home (done)
+ * * getting function names (getFuncs) should depend on login state and should only fire when login is true
+ * ChooseMetrics: once function names are received user sees the ChooseMetrics container + components
+ * * TODO here: display to user some sort of 'loading' icon while getting function names
+ * * Once function names are received display 3 picklists: Functions (multiselect), Metrics (multiselect), Period single select
+ * * Hold users selections in local container state
+ * * Once user submits selection, send API fetch request to get the requested data
+ * utils: getMetricsData fetch request that
+ * * gets the data
+ * * properly updates app state without mutating
+ * DisplayMetrics: once metric data is received, user should see the requested data graphed
+ * * TODO here: display to user some sort of 'loading' icon while getting metric data, or maybe an empty graph, or perhaps something else
+ * * User chooses graph to see, and it gets displayed
+ * * Open question: what does user see first? Do they choose the first graph to see on the ChooseMetrics container? On the current page? Is there some sort of app default value?
+ * * Open question: how hard is it to get different info onto the same graph?
+ * * Perhaps: shows a graph for every metric received, with all functions plotted
+ * * Perhaps: user can choose which functions they want to see on any one graph
+ * DisplayLogs:
+ * User can navigate to a log-devoted container
+ * That container allows user to choose which function they want to retreive logs for
+ * Once that data is obtained, we display to user in some sort of pleasing format
+ * * Open Question: What is the user journey? How to they request a log? Do they go to a devoted log page? Can they choose a function to get logs?
+ * utils: getLogData fetch request that
+ * * gets the data
+ * * properly updates app state without mutating
  */
 const App = () => {
   
