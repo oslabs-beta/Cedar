@@ -98,8 +98,9 @@ const App = () => {
   const [functionData, setFunctionData] = useState([]);
 
   useEffect(() => {
-    setFunctionData(getFuncs(setFunctionData));
-  }, []);
+    if(login){
+      getFuncs(setFunctionData);
+  }}, [login]);
 
   // useEffect(() => {
   //   if(functionData.length > 0) setFunctionNames(functionData.map(func => func.functionName));
@@ -117,7 +118,7 @@ const App = () => {
         </AppBar> */}
         {/* <Lobby /> */}
         <Routes>
-          <Route path="/" element={<Lobby />} />
+          <Route path="/" element={<Lobby loggedIn={login} setLogin={setLogin}/>} />
           <Route path="/home" element={<Home funcData={functionData} />} />
           <Route path="/logs" element={<Logs />} />
         </Routes>
