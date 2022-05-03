@@ -43,6 +43,13 @@ const themeDark = createTheme({
     },
   }
 });
+
+/** TODO
+ * set login state to true upon user logging in
+ * * Today's MVP: state is set to true immediately upon pushing the button
+ * Logging in takes user to /home (done)
+ * getting function names (getFuncs) should depend on login state and should only fire if login is true
+ */
 const App = () => {
   
   const [email, setEmail] = useState('');
