@@ -75,8 +75,8 @@ const App = () => {
         </AppBar> */}
         {/* <Lobby /> */}
         <Routes>
-          <Route path="/" element={<Lobby funcNames={functionNames} />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Lobby />} />
+          <Route path="/home" element={<Home funcNames={functionNames} />} />
           <Route path="/logs" element={<Logs />} />
         </Routes>
       </ThemeProvider>
