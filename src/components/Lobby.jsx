@@ -7,7 +7,13 @@ const Lobby = (props) => {
     const paperStyle = {padding: 30, height: '45vh auto', width:300, margin: '10px auto', opacity: 0.75}
     const [ signUp, setSignup ] = useState(false);
     const navigate = useNavigate();
-    const handleOnLoginClick = useCallback(() => navigate('/home', {replace: true}), [navigate]);
+
+    const handleOnLoginClick = useCallback(() => {
+      //props.loggedIn = true;
+      props.setLogin(true);
+      navigate('/home', {replace: true}), [navigate]
+    });
+    //add functionality, if props.loggedIn = true, navigate
     //const handleOnSignupClick = useCallback(() => navigate('/', {replace: true}), [navigate]);
     const handleSignupClick = () => {
       setSignup(true)
