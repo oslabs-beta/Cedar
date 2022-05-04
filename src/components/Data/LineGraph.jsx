@@ -78,8 +78,7 @@ function LineChart() {
       },
     },
     scales: {
-      d: {
-        axis: 'x',
+      x: {
         type: 'time',
         time: {
           unit: unit,
