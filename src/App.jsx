@@ -10,7 +10,8 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { getFuncs } from "./utils/fetchUtils";
+import { getFuncs, getLogs } from "./utils/fetchUtils";
+
 
 
 // ***Considering stashing this in a separate file
@@ -96,7 +97,7 @@ const App = () => {
   const [theme, setTheme] = useState(themeLight);
 
   const [functionData, setFunctionData] = useState([]);
-
+  //const [logData, setLogData] = useState([]);
   useEffect(() => {
     if(login){
       getFuncs(setFunctionData);
@@ -120,7 +121,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Lobby loggedIn={login} setLogin={setLogin}/>} />
           <Route path="/home" element={<Home funcData={functionData} />} />
-          <Route path="/logs" element={<Logs />} />
+          <Route path="/logs" element={<Logs funcData={functionData}/>} />
         </Routes>
       </ThemeProvider>
     </>

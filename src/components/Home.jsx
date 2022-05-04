@@ -9,7 +9,7 @@ import { getMetricData } from '../utils/fetchUtils';
 
 const Home = (props) => {
   // const [ color, setColor ] = useState('#007bff')
-
+  useEffect(() => { document.body.style.backgroundColor = 'white' }, [])
   // 
   const [funcsLoaded, setFuncsLoaded] = useState(props.funcData.length > 0);
   useEffect(() => {
@@ -57,10 +57,10 @@ const Home = (props) => {
       {funcsLoaded && <DataSelectionContainer funcNames={functionNames} />}
       </FormControl>
       <Box>
-      <FormControl>
-      <Graph />
+      {/* <FormControl> */}
+      {/* <Graph /> */}
       <LineGraph />
-      </FormControl>
+      {/* </FormControl> */}
       </Box>
     </div>
   )
