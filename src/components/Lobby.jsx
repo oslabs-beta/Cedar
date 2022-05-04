@@ -8,6 +8,7 @@ const Lobby = (props) => {
     const [ signUp, setSignup ] = useState(false);
     const navigate = useNavigate();
 
+
     const handleOnLoginClick = useCallback(() => {
       //props.loggedIn = true;
       props.setLogin(true);
