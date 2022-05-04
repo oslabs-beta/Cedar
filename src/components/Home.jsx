@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import { Box, Button, AppBar, Divider } from '@mui/material';
+import { Box, Button, AppBar, Divider, FormControl } from '@mui/material';
 import CssBaseline from "@mui/material/CssBaseline";
 import Graph from './Data/Graph';
 import LineGraph from './Data/LineGraph';
@@ -52,10 +52,16 @@ const Home = (props) => {
       {/* <AppBar>
         <h5>home</h5>
       </AppBar> */}
+      <FormControl sx={{ m: 1, width: 200 }}>
       <Button variant="contained" color= 'secondary' onClick= {handleLogClick} >Go to Logs</Button>
       {funcsLoaded && <DataSelectionContainer funcNames={functionNames} />}
-      {/* <Graph /> */}
+      </FormControl>
+      <Box>
+      <FormControl>
+      <Graph />
       <LineGraph />
+      </FormControl>
+      </Box>
     </div>
   )
 }
