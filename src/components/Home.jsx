@@ -1,9 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import { Box, Button, AppBar, Divider, FormControl } from '@mui/material';
 import CssBaseline from "@mui/material/CssBaseline";
-import Graph from './Data/Graph'
+import Graph from './Data/Graph';
+import LineGraph from './Data/LineGraph';
 import { useNavigate } from 'react-router';
 import DataSelectionContainer from '../containers/DataSelectionContainer';
+import { getMetricData } from '../utils/fetchUtils';
 
 const Home = (props) => {
   // const [ color, setColor ] = useState('#007bff')
@@ -17,6 +19,27 @@ const Home = (props) => {
   const [functionNames, setFunctionNames] = useState([]);
   useEffect(() => {
     if (funcsLoaded) setFunctionNames(props.funcData.map(func => func.functionName));
+  }, [funcsLoaded]);
+
+  useEffect(() => {
+    if (funcsLoaded) {
+      console.log('firing function')
+      const startTime = Math.floor(Date.now() - (1000*60*60*24*7));
+      const metrics = ['Invocations', 'Throttles', 'Errors', 'Duration'];
+      const functions = [
+        "test-func-app-HelloWorldFunction-2DJ2VlqjVGLQ",
+        "testloop",
+        "logsdata",
+        "dbUpdated",
+        "mir-app-HelloWorldFunction-54OVb43xIQbl",
+        "metricsdata",
+        "iterateLoop",
+        "myNums",
+        "myloop",
+        "sentEmail"
+      ];
+      getMetricData(() => {return}, functions, metrics, startTime);
+    }
   }, [funcsLoaded]);
 
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -36,6 +59,7 @@ const Home = (props) => {
       <Box>
       <FormControl>
       <Graph />
+      <LineGraph />
       </FormControl>
       </Box>
     </div>
