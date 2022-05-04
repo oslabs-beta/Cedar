@@ -50,9 +50,32 @@ export const getMetricData = async (setFunctionData, functions, metrics, startTi
         'Content-Type': 'application/json'
       }
     });
-    console.log('got data')
+    console.log('got data');
     const parsedData = await data.json();
     console.log(parsedData);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getLogs = async (setFunctionData, func, startTime, endTime) => {
+  if (!endTime) endTime = Math.floor(Date.now() / (1000*60))*(1000*60);
+  try {
+    console.log('fetching logs');
+    const logs = await fetch('/api/aws/getLogsData', {
+      method: 'POST',
+      body: JSON.stringify({
+        start: startTime,
+        end: endTime,
+        func,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log('got logs');
+    const parsedLogs = await logs.json();
+    console.log(parsedLogs);
   } catch (err) {
     console.log(err);
   }

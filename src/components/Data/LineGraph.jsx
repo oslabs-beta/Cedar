@@ -101,7 +101,6 @@ function LineChart() {
       data: func.values,
     };
   })
-  console.log(datasets)
 
    
   return (
