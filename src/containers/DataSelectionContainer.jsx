@@ -60,7 +60,7 @@ const DataSelectionContainer = (props) => {
     // <>
     //   <h1>Metric options will go here</h1>
     // </>
-    <div>
+    <div className= 'dataSelection'>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-checkbox-label">Function(s)</InputLabel>
         <Select
