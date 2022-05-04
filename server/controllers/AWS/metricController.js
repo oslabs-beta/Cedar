@@ -1,25 +1,5 @@
-const {
-  CloudWatchClient,
-  GetMetricDataCommand
-} = require('@aws-sdk/client-cloudwatch');
-
 //require in utility functions
-const utilities = require('./utilities.js')
-
-//require dotenv to read from .env file and grab credentials 
-const dotenv = require('dotenv');
-dotenv.config();
-
-const creds = {
-  region: process.env.AWS_REGION,
-  credential: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  }
-};
-
-//declare a client as a new cloudwatch client passing in creds object
-const metricClient = new CloudWatchClient(creds);
+const utilities = require('./utilities/metricUtilities.js')
 
 //this is what we will attatch middleware onto and export
 const metricController = {};
@@ -29,62 +9,98 @@ metricController.getMetrics = async (req, res, next) => {
     //pull variables off of req.body
     //funcs and metrics will be arrays
     const { start, end, funcs, metrics } = req.body;
-    console.log(start, end, funcs, metrics)
-
-    const prepAndSend = async (dataArr = [], nextToken = null, params = null) => {
-      //if params variable is null (this is the first time we're invoking this func)
-      //invoke the prepMetricParameters function in the utilities file to populate params
-      if (!params) params = utilities.prepMetricParams(start, end, funcs, metrics);
-
-      //if nextToken is not null, add it to params
-      if (nextToken) params.NextToken = nextToken;
-  
-      //declare command variable to be a new get metric data command passing in params 
-      const metricCommand = new GetMetricDataCommand(params);
-  
-      //attatch result of sending the command to a variable 
-      const metricData = await metricClient.send(metricCommand);
-      
-      dataArr.push(metricData.MetricDataResults);
-      console.log('data', dataArr);
-      //if metricData receives a next token, 
-      //call the function recursively passing in the next token
-      return !metricData.NextToken ? dataArr.flat() : prepAndSend(dataArr, metricData.NextToken, params);
-    }
     
-    //this is hacky im sorry 
-    const response = await prepAndSend();
+    //call prep and send function in the utilites folder uner metricUtilities
+    //this will prep parameters and send the getMetricDataCommand command to retrieve lambda metrics
+    const response = await utilities.prepAndSend(start, end, funcs, metrics);
 
     const data = [];
     
-    response.forEach(el => {
-      if (el.Timestamps.length && el.Values.length){
-        data.push({ 
-          functionName: funcs[Number(el.Id[el.Id.length - 1])],
-          metricName: el.Label,
-          timeStamps: el.Timestamps,
-          values: el.Values
-        })
-      }
-    });
+    //console.log(response);
+    //loop through the response
+    //we will send back an array of objects to the front end in this format:
 
-    res.locals.metricsData = data;
+
+    // [
+    //   {
+    //    'helloWord': {
+    //     metrics: [
+    //      ‘Invocations’: {
+    //         timestamps: []
+    //         vals: []
+    //       },
+    //      ‘Errors’: {
+    //         timestamps: []
+    //         vals: []
+    //       },
+    //      }
+    
+    const parseData = async () => {
+      //create a cache object
+      const cache = {};
+    
+      //loop through data
+      response.forEach(el => {
+        //if element doesnt exist in the cache, create a key for it
+        //im sorry
+        if (!cache[funcs[Number(el.Id[el.Id.length - 1])]]){
+          cache[funcs[Number(el.Id[el.Id.length - 1])]] = { metrics  : [] }
+          //push into the metrics array
+         
+          const obj = {}
+
+          obj[el.Label] = { 
+            timestamps: el.Timestamps,
+            vals: el.Values
+          }
+
+          cache[funcs[Number(el.Id[el.Id.length - 1])]].metrics.push(obj)
+
+
+        } 
+        else if (cache[funcs[Number(el.Id[el.Id.length - 1])]]){
+          //if the key exists, we have to check the metric key to see if the metric exists
+          // cache[funcs[Number(el.Id[el.Id.length - 1])]].metrics.forEach(metric => {
+          const metricsInCache = cache[funcs[Number(el.Id[el.Id.length - 1])]].metrics;
+          let metricFound = false;
+          for (let i = 0; i < metricsInCache.length; i++) {
+            // console.log('metrics in cache: ', metricsInCache[i]);
+            // console.log('metric to add: ', el.Label);
+            if (metricsInCache[i][el.Label]){
+              metricFound = true;
+              metricsInCache[i][el.Label].timestamps = metricsInCache[i][el.Label].timestamps.concat(el.Timestamps),
+              metricsInCache[i][el.Label].vals = metricsInCache[i][el.Label].vals.concat(el.Values);
+              break;
+            }
+          }            
+          if (!metricFound){
+            const obj = {};
+            obj[el.Label] = { 
+              timestamps: el.Timestamps,
+              vals: el.Values
+            }
+            cache[funcs[Number(el.Id[el.Id.length - 1])]].metrics.push(obj);
+          } 
+        }
+      })
+      console.log(cache);
+      return cache;
+    }
+
+
+    res.locals.metricsData = await parseData();
+    console.log('~~~SUCCESS~~~')
     return next();
   } catch (err) {
-    console.log('error', err)
+    console.log('~~~ERROR~~~', err)
+    return next({
+      log: 'An error occurred in metricController.getMetrics middleware',
+      message: {err: 'An error occurred while retreiving metric data'}
+    })
   }
 
 }
 
-// [
-//   {
-//     functionName:
-//     metricName:
-//     timeStamps: [ts1, ts2, ... ], // UNIX timestamps?
-//     Values: [val1, val2, ...]
-//   },
-// ]
-
-
-
 module.exports = metricController;
+
+         
