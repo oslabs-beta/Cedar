@@ -1,7 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import { Box, Button, AppBar, Divider } from '@mui/material';
 import CssBaseline from "@mui/material/CssBaseline";
-import Graph from './Data/Graph'
+import Graph from './Data/Graph';
+import LineGraph from './Data/LineGraph';
 import { useNavigate } from 'react-router';
 import DataSelectionContainer from '../containers/DataSelectionContainer';
 import { getMetricData } from '../utils/fetchUtils';
@@ -53,7 +54,8 @@ const Home = (props) => {
       </AppBar> */}
       <Button variant="contained" color= 'secondary' onClick= {handleLogClick} >Go to Logs</Button>
       {funcsLoaded && <DataSelectionContainer funcNames={functionNames} />}
-      <Graph />
+      {/* <Graph /> */}
+      <LineGraph />
     </div>
   )
 }
