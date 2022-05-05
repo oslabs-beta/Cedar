@@ -4,7 +4,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { getMetricData } from '../utils/fetchUtils';
 import { timeConversions as tc } from '../utils/conversions';
 
-const METRICS = ['Invocations', 'Throttles', 'Errors', 'Duration']
+const METRICS = ['Invocations', 'Throttles', 'Errors', 'Duration'];
 const PERIODS = {
   'One Hour': tc.msPerHr,
   'Three Hours': tc.msPerHr*3,
@@ -15,9 +15,10 @@ const PERIODS = {
   'Two Weeks': tc.msPerWeek*2,
   '30 Days': tc.msPerDay*30,
   'Custom': null
-}
+};
+
 const PERIODARR = [];
-for(let period in PERIODS){
+for(let period in PERIODS) {
   PERIODARR.push(period)
 }
 
@@ -43,26 +44,34 @@ const DataSelectionContainer = (props) => {
       typeof value === 'string' ? value.split(',') : value,
     );
     // setFuncName(props.funcNames.indexOf(value) !== 0 ? value.split(' ,') : value);
-  }
+  };
+
   const [metricName, setMetricName] = useState([]);
   const handleMetricChange = (event) => {
     const {
       target: { value },
     } = event;
     setMetricName(typeof value === 'string' ? value.split(',') : value);
-  }
+  };
+
   const [period, setPeriod] = useState('');
   const handlePeriodChange = (event) => {
     const {
       target: { value },
     } = event;
     setPeriod(typeof value === 'string' ? value.split(',') : value);
-  }
+  };
 
   const getMetrics = () => {
     const startTime = Math.floor(Date.now() - PERIODS[period[0]]);
-    getMetricData(props.funcData, props.setFunctionData, funcName, metricName, startTime);
-  }
+    getMetricData(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, metricName, startTime);
+    props.setDisplayProps({
+      functions: funcName,
+      metrics: metricName,
+      period: period[0],
+      startTime: startTime
+    });
+  };
 
   return (
     // <>
