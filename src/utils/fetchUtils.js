@@ -71,7 +71,7 @@ export const getMetricData = async (currFunctionData, setFunctionData, setDataLo
   }
 }
 
-export const getLogs = async (setFunctionData, func, startTime, endTime) => {
+export const getLogs = async (currFunctionData, setFunctionData, setDataLoaded, func, startTime, endTime) => {
   if (!endTime) endTime = Math.floor(Date.now() / (1000*60))*(1000*60);
   try {
     const logs = await fetch('/api/aws/getLogsData', {
@@ -87,6 +87,12 @@ export const getLogs = async (setFunctionData, func, startTime, endTime) => {
     });
     const parsedLogs = await logs.json();
     console.log(parsedLogs);
+    const newFunctionData = {
+      ...currFunctionData
+    }
+    newFunctionData[func].logs = parsedLogs;
+    setFunctionData(newFunctionData);
+    setDataLoaded(true);
   } catch (err) {
     console.log(err);
   }
