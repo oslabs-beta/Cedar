@@ -6,30 +6,32 @@ import LogSelectionContainer from '../containers/LogSelectionContainer';
 
 const Logs = (props) => {
   //this allows for navigation back to home route when the 'back' button is clicked
-  const navigate = useNavigate();
-  const handleBackClick = useCallback(() => navigate('/home', {replace: true}), [navigate]);
   
   const [funcsLoaded, setFuncsLoaded] = useState(Object.keys(props.funcData).length > 0);
   useEffect(() => {
     setFuncsLoaded(Object.keys(props.funcData).length > 0);
   }, [props.funcData]);
-
+  
   const [functionNames, setFunctionNames] = useState([]);
   useEffect(() => {
     if (funcsLoaded) setFunctionNames(Object.keys(props.funcData));
   }, [funcsLoaded]);
+  
+  // useEffect(() => {
+  //   const startTime = Math.floor(Date.now() - (1000*60*60*24*7));
+  //   const func = 'myloop';
+  //   getLogs(() => {return}, func, startTime);
+  // });
 
-  useEffect(() => {
-    const startTime = Math.floor(Date.now() - (1000*60*60*24*7));
-    const func = 'myloop';
-    getLogs(() => {return}, func, startTime);
-  })
-
+  const [dataLoaded, setDataLoaded] = useState(false);
+  
+  const navigate = useNavigate();
+  const handleBackClick = useCallback(() => navigate('/home', {replace: true}), [navigate]);
 
   return(
     <div>
     <Button variant="contained" color= 'secondary' onClick= {handleBackClick} >Return Home</Button>
-    {funcsLoaded && <LogSelectionContainer funcNames={functionNames} />}
+    {funcsLoaded && <LogSelectionContainer funcNames={functionNames} funcData={props.funcData} setFunctionData={props.setFunctionData} dataLoaded={dataLoaded} setDataLoaded={setDataLoaded}/>}
     </div>
   )
 }
