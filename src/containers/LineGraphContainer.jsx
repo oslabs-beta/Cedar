@@ -2,6 +2,9 @@ import React from "react";
 import { periods, roundingUtil } from '../utils/conversions';
 import LineGraph from '../components/Data/LineGraph';
 
+const COLORS = ['green', 'purple', 'pink', 'orange', 'blue', 'red', 'yellow'];
+let COLORINDEX = 0
+
 function LineGraphContainer(props) {
   const { functions, metrics, period, startTime } = props.displayProps;
   // determine the x axis time unit given the period
@@ -16,6 +19,7 @@ function LineGraphContainer(props) {
   }
   const dataProps = [];
   metrics.forEach(metric => {
+    COLORINDEX = 0;
     const dataProp = {
       timestamps,
       unitName,
@@ -27,7 +31,10 @@ function LineGraphContainer(props) {
       const dataset = {
         id: func,
         label: func,
+        backgroundColor: COLORS[COLORINDEX],
+        borderColor: COLORS[COLORINDEX],
       };
+      COLORINDEX++
       const rawData = props.funcData[func].metrics[metric];
       // data for plot, aligned with timestamps for plot
       let rawDataPointer = rawData.timestamps.length - 1;
