@@ -19,8 +19,18 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  // background-image: url('../images/WallpaperDog-10879441.jpg');
+  // background-size: cover;
+}
+
+.lobbyPage {
   background-image: url('../images/WallpaperDog-10879441.jpg');
   background-size: cover;
+  position:absolute;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
 }
 
 .homePage{
