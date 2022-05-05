@@ -63,6 +63,7 @@ const DataSelectionContainer = (props) => {
   };
 
   const getMetrics = () => {
+    props.setDataLoaded(false);
     const startTime = Math.floor(Date.now() - PERIODS[period[0]]);
     getMetricData(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, metricName, startTime);
     props.setDisplayProps({
