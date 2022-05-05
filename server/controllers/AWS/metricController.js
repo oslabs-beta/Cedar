@@ -10,85 +10,20 @@ metricController.getMetrics = async (req, res, next) => {
     //funcs and metrics will be arrays
     const { start, end, funcs, metrics } = req.body;
     
-    //call prep and send function in the utilites folder uner metricUtilities
+    //create an object that will represent each function with a unique key
+    //we will use this to make parsing through our data more seamless
+    const funcObj = {};
+    for (let i = 0; i < funcs.length; i += 1){
+        funcObj[`func${i}`] = funcs[i]
+    };
+
+    //call prep and send function in the utilites folder in the metricUtilities.js file
     //this will prep parameters and send the getMetricDataCommand command to retrieve lambda metrics
     const response = await utilities.prepAndSend(start, end, funcs, metrics);
 
-    const data = [];
-    
-    //console.log(response);
-    //loop through the response
-    //we will send back an array of objects to the front end in this format:
-
-
-    // [
-    //   {
-    //    'helloWord': {
-    //     metrics: [
-    //      ‘Invocations’: {
-    //         timestamps: []
-    //         vals: []
-    //       },
-    //      ‘Errors’: {
-    //         timestamps: []
-    //         vals: []
-    //       },
-    //      }
-    
-    const parseData = async () => {
-      //create a cache object
-      const cache = {};
-    
-      //loop through data
-      response.forEach(el => {
-        //if element doesnt exist in the cache, create a key for it
-        //im sorry
-        if (!cache[funcs[Number(el.Id[el.Id.length - 1])]]){
-          cache[funcs[Number(el.Id[el.Id.length - 1])]] = { metrics  : [] }
-          //push into the metrics array
-         
-          const obj = {}
-
-          obj[el.Label] = { 
-            timestamps: el.Timestamps,
-            vals: el.Values
-          }
-
-          cache[funcs[Number(el.Id[el.Id.length - 1])]].metrics.push(obj)
-
-
-        } 
-        else if (cache[funcs[Number(el.Id[el.Id.length - 1])]]){
-          //if the key exists, we have to check the metric key to see if the metric exists
-          // cache[funcs[Number(el.Id[el.Id.length - 1])]].metrics.forEach(metric => {
-          const metricsInCache = cache[funcs[Number(el.Id[el.Id.length - 1])]].metrics;
-          let metricFound = false;
-          for (let i = 0; i < metricsInCache.length; i++) {
-            // console.log('metrics in cache: ', metricsInCache[i]);
-            // console.log('metric to add: ', el.Label);
-            if (metricsInCache[i][el.Label]){
-              metricFound = true;
-              metricsInCache[i][el.Label].timestamps = metricsInCache[i][el.Label].timestamps.concat(el.Timestamps),
-              metricsInCache[i][el.Label].vals = metricsInCache[i][el.Label].vals.concat(el.Values);
-              break;
-            }
-          }            
-          if (!metricFound){
-            const obj = {};
-            obj[el.Label] = { 
-              timestamps: el.Timestamps,
-              vals: el.Values
-            }
-            cache[funcs[Number(el.Id[el.Id.length - 1])]].metrics.push(obj);
-          } 
-        }
-      })
-      console.log(cache);
-      return cache;
-    }
-
-
-    res.locals.metricsData = await parseData();
+    //attatch the invocation of the parse data function onto res.locals
+    //parseData is in the utilites folder in the metricUtilities.js file
+    res.locals.metricsData = await utilities.parseData(response, funcObj);
     console.log('~~~SUCCESS~~~')
     return next();
   } catch (err) {
@@ -97,10 +32,8 @@ metricController.getMetrics = async (req, res, next) => {
       log: 'An error occurred in metricController.getMetrics middleware',
       message: {err: 'An error occurred while retreiving metric data'}
     })
-  }
+  };
 
-}
+};
 
 module.exports = metricController;
-
-         
