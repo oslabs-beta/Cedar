@@ -96,17 +96,27 @@ const App = () => {
   const [login, setLogin] = useState(false);
   const [theme, setTheme] = useState(themeLight);
 
-  const [functionData, setFunctionData] = useState([]);
+  const [functionData, setFunctionData] = useState({});
+  // 
   //const [logData, setLogData] = useState([]);
   useEffect(() => {
     if(login){
       getFuncs(setFunctionData);
   }}, [login]);
 
+  useEffect(() => {
+    console.log(functionData)
+  }, [functionData]);
   // useEffect(() => {
   //   if(functionData.length > 0) setFunctionNames(functionData.map(func => func.functionName));
   // }, [functionData]);
- 
+
+/**
+ * func: {
+ *   metrics: {invocations: {}, duration: {}, }
+ *   logs:
+ * }
+ */
 
 
 
@@ -120,7 +130,7 @@ const App = () => {
         {/* <Lobby /> */}
         <Routes>
           <Route path="/" element={<Lobby loggedIn={login} setLogin={setLogin}/>} />
-          <Route path="/home" element={<Home funcData={functionData} />} />
+          <Route path="/home" element={<Home funcData={functionData} setFunctionData={setFunctionData} />} />
           <Route path="/logs" element={<Logs funcData={functionData}/>} />
         </Routes>
       </ThemeProvider>
