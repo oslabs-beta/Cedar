@@ -7,7 +7,7 @@ router.post('/login', userController.login, (req, res) => {
   res.status(200).send('login successful');
 });
 
-router.post('signup', userController.signUp, (req, res) => {
+router.post('/signup', userController.signUp, (req, res) => {
   res.redirect('/login');
 });
 
