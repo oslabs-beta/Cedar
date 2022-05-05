@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import { OutlinedInput, InputLabel, MenuItem, FormControl, ListItemText, Checkbox, Button } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { getMetricData } from '../utils/fetchUtils';
+import { timeConversions as tc } from '../utils/conversions';
 
 const METRICS = ['Invocations', 'Throttles', 'Errors', 'Duration']
 const PERIODS = {
-  'One Hour': (1000*60*60),
-  'Three Hours': (1000*60*60)*3,
-  'Six Hours': (1000*60*60)*6,
-  'One Day': ((1000*60*60)*24),
-  'Three Days': ((1000*60*60)*24)*3,
-  'One Week': ((1000*60*60)*24)*7,
-  'Two Weeks': ((1000*60*60)*24)*14,
-  '30 Days': ((1000*60*60)*24)*30,
+  'One Hour': tc.msPerHr,
+  'Three Hours': tc.msPerHr*3,
+  'Six Hours': tc.msPerHr*6,
+  'One Day': tc.msPerDay,
+  'Three Days': tc.msPerDay*3,
+  'One Week': tc.msPerWeek,
+  'Two Weeks': tc.msPerWeek*2,
+  '30 Days': tc.msPerDay*30,
   'Custom': null
 }
 const PERIODARR = [];
@@ -56,6 +58,12 @@ const DataSelectionContainer = (props) => {
     } = event;
     setPeriod(typeof value === 'string' ? value.split(',') : value);
   }
+
+  const getMetrics = () => {
+    const startTime = Math.floor(Date.now() - PERIODS[period[0]]);
+    getMetricData(props.funcData, props.setFunctionData, funcName, metricName, startTime);
+  }
+
   return (
     // <>
     //   <h1>Metric options will go here</h1>
@@ -120,7 +128,7 @@ const DataSelectionContainer = (props) => {
         </Select>
       </FormControl>
       <FormControl>
-        <Button variant="contained" color= 'secondary' >Go</Button>
+        <Button variant="contained" color= 'secondary' onClick={getMetrics} >Go</Button>
       </FormControl>
     </div>
   )

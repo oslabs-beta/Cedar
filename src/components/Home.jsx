@@ -11,36 +11,35 @@ const Home = (props) => {
   // const [ color, setColor ] = useState('#007bff')
   useEffect(() => { document.body.style.backgroundColor = 'white' }, [])
   // 
-  const [funcsLoaded, setFuncsLoaded] = useState(props.funcData.length > 0);
+  const [funcsLoaded, setFuncsLoaded] = useState(Object.keys(props.funcData).length > 0);
   useEffect(() => {
-    setFuncsLoaded(props.funcData.length > 0);
+    setFuncsLoaded(Object.keys(props.funcData).length > 0);
   }, [props.funcData]);
 
   const [functionNames, setFunctionNames] = useState([]);
   useEffect(() => {
-    if (funcsLoaded) setFunctionNames(props.funcData.map(func => func.functionName));
+    if (funcsLoaded) setFunctionNames(Object.keys(props.funcData));
   }, [funcsLoaded]);
 
-  useEffect(() => {
-    if (funcsLoaded) {
-      console.log('firing function')
-      const startTime = Math.floor(Date.now() - (1000*60*60*24*7));
-      const metrics = ['Invocations', 'Throttles', 'Errors', 'Duration'];
-      const functions = [
-        "test-func-app-HelloWorldFunction-2DJ2VlqjVGLQ",
-        "testloop",
-        "logsdata",
-        "dbUpdated",
-        "mir-app-HelloWorldFunction-54OVb43xIQbl",
-        "metricsdata",
-        "iterateLoop",
-        "myNums",
-        "myloop",
-        "sentEmail"
-      ];
-      getMetricData(() => {return}, functions, metrics, startTime);
-    }
-  }, [funcsLoaded]);
+  // useEffect(() => {
+  //   if (funcsLoaded) {
+  //     const startTime = Math.floor(Date.now() - (1000*60*60*24*7));
+  //     const metrics = ['Invocations', 'Throttles', 'Errors', 'Duration'];
+  //     const functions = [
+  //       "test-func-app-HelloWorldFunction-2DJ2VlqjVGLQ",
+  //       "testloop",
+  //       "logsdata",
+  //       "dbUpdated",
+  //       "mir-app-HelloWorldFunction-54OVb43xIQbl",
+  //       "metricsdata",
+  //       "iterateLoop",
+  //       "myNums",
+  //       "myloop",
+  //       "sentEmail"
+  //     ];
+  //     getMetricData(props.funcData, props.setFunctionData, functions, metrics, startTime);
+  //   }
+  // }, [funcsLoaded]);
 
   const [dataLoaded, setDataLoaded] = useState(false);
   //TODO: Use effect to set dataLoaded to true upon getting metrics data
@@ -54,7 +53,7 @@ const Home = (props) => {
       </AppBar> */}
       <FormControl sx={{ m: 1, width: 200 }}>
       <Button variant="contained" color= 'secondary' onClick= {handleLogClick} >Go to Logs</Button>
-      {funcsLoaded && <DataSelectionContainer funcNames={functionNames} />}
+      {funcsLoaded && <DataSelectionContainer funcNames={functionNames} funcData={props.funcData} setFunctionData={props.setFunctionData} />}
       </FormControl>
       <Box>
       {/* <FormControl> */}

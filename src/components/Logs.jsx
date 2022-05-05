@@ -9,18 +9,17 @@ const Logs = (props) => {
   const navigate = useNavigate();
   const handleBackClick = useCallback(() => navigate('/home', {replace: true}), [navigate]);
   
-  const [funcsLoaded, setFuncsLoaded] = useState(props.funcData.length > 0);
+  const [funcsLoaded, setFuncsLoaded] = useState(Object.keys(props.funcData).length > 0);
   useEffect(() => {
-    setFuncsLoaded(props.funcData.length > 0);
+    setFuncsLoaded(Object.keys(props.funcData).length > 0);
   }, [props.funcData]);
 
   const [functionNames, setFunctionNames] = useState([]);
   useEffect(() => {
-    if (funcsLoaded) setFunctionNames(props.funcData.map(func => func.functionName));
+    if (funcsLoaded) setFunctionNames(Object.keys(props.funcData));
   }, [funcsLoaded]);
 
   useEffect(() => {
-    console.log('getting the logs now');
     const startTime = Math.floor(Date.now() - (1000*60*60*24*7));
     const func = 'myloop';
     getLogs(() => {return}, func, startTime);
