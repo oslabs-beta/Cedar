@@ -25,47 +25,44 @@ ChartJS.register(
   Legend
 );
 
-function LineChart() {
-  // const timesRaw = [
-  //   "2022-04-28T16:12:00.000Z",
-  //   "2022-04-28T01:14:00.000Z",
-  //   "2022-04-28T00:40:00.000Z",
-  //   "2022-04-28T00:39:00.000Z",
-  //   "2022-04-27T14:31:00.000Z",
-  //   "2022-04-27T14:26:00.000Z"
-  // ]
-  // const times = timesRaw.map(time => {
-  //   return Date.parse(time)
-  // });
-  // const values = [10, 2, 3, 1, 1, 6];
-  const metric = 'Invocations';
-  const timeStamps = [];
-  const funcOne = {
-    name: 'funcOne',
-    values: []
-  };
-  const funcTwo = {
-    name: 'funcTwo',
-    values: []
-  };
-  const funcThree = {
-    name: 'funcThree',
-    values: []
-  };
-  const now = Date.now();
-  const yesterday = now - (tc.msPerSec * tc.secPerMin * tc.minPerHr * tc.hrPerDay)
-  for (let time = yesterday; time <= now; time += tc.msPerSec * tc.secPerMin * tc.minPerHr) {
-    timeStamps.push(time);
-    funcOne.values.push(Math.floor(Math.random()*10));
-    funcTwo.values.push(Math.floor(Math.random()*10));
-    funcThree.values.push(Math.floor(Math.random()*10));
-  };
-  const unit = 'hour';
+// props: metric: str, funcs: {name:{timestamps, vals}, {}}, period
+// props: x & y mins and max
+// processing: given a period, determine:
+  // x axis scale and new timestamps for that period - DONE
+  // y axis vals for each function in each new timestamp - DONE
+  // outputs - new labels array, array of functions, each an obj with name, values, maybe some other stuff
+function  LineGraph (props) {
+  // const metric = 'Invocations';
+  // const timeStamps = [];
+  // const funcOne = {
+  //   name: 'funcOne',
+  //   values: []
+  // };
+  // const funcTwo = {
+  //   name: 'funcTwo',
+  //   values: []
+  // };
+  // const funcThree = {
+  //   name: 'funcThree',
+  //   values: []
+  // };
+  // const now = Date.now();
+  // const yesterday = now - (tc.msPerSec * tc.secPerMin * tc.minPerHr * tc.hrPerDay)
+  // for (let time = yesterday; time <= now; time += tc.msPerSec * tc.secPerMin * tc.minPerHr) {
+  //   timeStamps.push(time);
+  //   funcOne.values.push(Math.floor(Math.random()*10));
+  //   funcTwo.values.push(Math.floor(Math.random()*10));
+  //   funcThree.values.push(Math.floor(Math.random()*10));
+  // };
+  const { timestamps, unitName, timeMin, metricName, functions } = props.dataProp;
+  console.log(timestamps);
+  console.log(functions);
+  // const unit = 'hour';
 
-  const dataProp = {
-    timeStamps,
-    functions: [funcOne, funcTwo, funcThree]
-  };
+  // const dataProp = {
+  //   timeStamps,
+  //   functions: [funcOne, funcTwo, funcThree]
+  // };
 
   const options = {
     responsive: true,
@@ -74,33 +71,34 @@ function LineChart() {
         position: 'bottom',
       },
       title: {
-        text: metric
+        text: metricName
       },
     },
     scales: {
       x: {
         type: 'time',
         time: {
-          unit: unit,
+          unit: unitName,
         },
-        min: yesterday - (tc.msPerSec * tc.secPerMin * tc.minPerHr),
-        max: now + (tc.msPerSec * tc.secPerMin * tc.minPerHr),
+        min: timeMin,
+        // max: now + (tc.msPerSec * tc.secPerMin * tc.minPerHr),
       },
       y: {
         min: 0,
-        max: 12,
+        // max: 12,
       }
     },
     cubicInterpolationMode: 'monotone',
   };
+  console.log(options);
 
-  const datasets = dataProp.functions.map(func => {
-    return {
-      id: func.name,
-      label: func.name,
-      data: func.values,
-    };
-  })
+  // const datasets = dataProp.functions.map(func => {
+  //   return {
+  //     id: func.name,
+  //     label: func.name,
+  //     data: func.values,
+  //   };
+  // })
 
    
   return (
@@ -108,8 +106,8 @@ function LineChart() {
       <Line className='testChart'
         options={options}
         data={{
-          labels: dataProp.timeStamps,
-          datasets,
+          labels: timestamps,
+          datasets: functions,
         }}
       />
     </div>
@@ -117,4 +115,4 @@ function LineChart() {
   // }
 };
 
-export default LineChart;
+export default LineGraph;

@@ -61,3 +61,12 @@ body{
   display: inline;
   font-weight: bold;
 }
+
+.messageRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.messageRowItem {
+  display: inline;
+}

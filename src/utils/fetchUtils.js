@@ -34,7 +34,7 @@ export const getFuncs = async (setFunctionData) => {
  * @param {number} startTime - unix time from which to begin pulling metrics data
  * @param {number} endTime - unix time until which to pulling metrics data. Defaults to now, rounded down to nearest minute.
  */
-export const getMetricData = async (currFunctionData, setFunctionData, functions, metrics, startTime, endTime) => {
+export const getMetricData = async (currFunctionData, setFunctionData, setDataLoaded, functions, metrics, startTime, endTime) => {
   if (!endTime) endTime = Math.floor(Date.now() / (1000*60))*(1000*60);
   try {
     const data = await fetch('/api/aws/getMetricData', {
@@ -50,7 +50,7 @@ export const getMetricData = async (currFunctionData, setFunctionData, functions
       }
     });
     const parsedData = await data.json();
-    console.log(parsedData)
+    // console.log(parsedData)
     const newFunctionData = {
       ...currFunctionData
     };
@@ -65,6 +65,7 @@ export const getMetricData = async (currFunctionData, setFunctionData, functions
       });
     });
     setFunctionData(newFunctionData);
+    setDataLoaded(true);
   } catch (err) {
     console.log(err);
   }

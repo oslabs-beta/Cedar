@@ -104,9 +104,9 @@ const App = () => {
       getFuncs(setFunctionData);
   }}, [login]);
 
-  useEffect(() => {
-    console.log(functionData)
-  }, [functionData]);
+  // useEffect(() => {
+  //   console.log(functionData)
+  // }, [functionData]);
   // useEffect(() => {
   //   if(functionData.length > 0) setFunctionNames(functionData.map(func => func.functionName));
   // }, [functionData]);
