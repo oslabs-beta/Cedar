@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { OutlinedInput, InputLabel, MenuItem, FormControl, ListItemText, Checkbox, Button } from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import { getMetricData } from '../utils/fetchUtils';
 import { timeConversions as tc } from '../utils/conversions';
 
@@ -75,9 +75,6 @@ const DataSelectionContainer = (props) => {
   };
 
   return (
-    // <>
-    //   <h1>Metric options will go here</h1>
-    // </>
     <div className= 'dataSelection'>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-checkbox-label">Function(s)</InputLabel>
@@ -145,13 +142,3 @@ const DataSelectionContainer = (props) => {
 }
 
 export default DataSelectionContainer;
-
-{/* <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem> */}
-
-          {/* {PERIODS.map((period) => (
-            <MenuItem key={period} value={period}>
-              <ListItemText primary={period} />
-            </MenuItem>
-          ))} */}
