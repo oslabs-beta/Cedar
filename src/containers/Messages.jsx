@@ -1,6 +1,6 @@
 import React from 'react';
-import LogsHeader from '../LogsHeader';
-import MessageRow from '../MessageRow';
+import LogsHeader from '../components/LogsHeader';
+import MessageRow from '../components/MessageRow';
 
 const Messages = (props) => {
   const messageRows = props.logs.map(message => {

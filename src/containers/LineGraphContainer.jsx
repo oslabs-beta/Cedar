@@ -1,6 +1,6 @@
 import React from "react";
 import { periods, roundingUtil } from '../utils/conversions';
-import LineGraph from '../components/Data/LineGraph';
+import LineGraph from '../components/LineGraph';
 
 const COLORS = ['green', 'purple', 'pink', 'orange', 'blue', 'red', 'yellow'];
 let COLORINDEX = 0
@@ -62,7 +62,6 @@ function LineGraphContainer(props) {
   console.log(LineGraphs)
   return (
     <>
-      <h1>This Container Will Hold Line Graph</h1>
       {LineGraphs}
     </>
   )

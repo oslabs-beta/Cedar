@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Grid, Paper, Button, AppBar } from '@mui/material';
 import Signup from './Signup';
 
-const Lobby = (props) => {
+const LobbyPage = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -17,7 +17,7 @@ const Lobby = (props) => {
   const handleOnLoginClick = useCallback(() => {
     //props.loggedIn = true;
     props.setLogin(true);
-    navigate('/home', {replace: true}), [navigate]
+    navigate('/metrics', {replace: true}), [navigate]
   });
   //add functionality, if props.loggedIn = true, navigate
   //const handleOnSignupClick = useCallback(() => navigate('/', {replace: true}), [navigate]);
@@ -55,4 +55,4 @@ const Lobby = (props) => {
 
 
 
-export default Lobby;
+export default LobbyPage;

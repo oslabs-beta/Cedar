@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Lobby from './components/Lobby';
-//import { AppBar } from '@mui/material';
-import Signup from './components/Signup';
-import Home from './components/Home';
-import Logs from './components/Logs';
+import LobbyPage from './containers/LobbyPage';
+import MetricsPage from './containers/MetricsPage';
+import LogsPage from './containers/LogsPage';
 import {
   Routes,
   Route,
@@ -129,9 +127,9 @@ const App = () => {
         </AppBar> */}
         {/* <Lobby /> */}
         <Routes>
-          <Route path="/" element={<Lobby loggedIn={login} setLogin={setLogin}/>} />
-          <Route path="/home" element={<Home funcData={functionData} setFunctionData={setFunctionData} />} />
-          <Route path="/logs" element={<Logs funcData={functionData} setFunctionData={setFunctionData}/>} />
+          <Route path="/" element={<LobbyPage loggedIn={login} setLogin={setLogin}/>} />
+          <Route path="/metrics" element={<MetricsPage funcData={functionData} setFunctionData={setFunctionData} />} />
+          <Route path="/logs" element={<LogsPage funcData={functionData} setFunctionData={setFunctionData}/>} />
         </Routes>
       </ThemeProvider>
     </>

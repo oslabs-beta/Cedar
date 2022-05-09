@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { TextField, Grid, Paper, Button, AppBar } from '@mui/material';
-import Lobby from './Lobby';
-import Home from './Home';
+import Lobby from './LobbyPage';
+import Home from './MetricsPage';
 
 const Signup = () => {
   const [ create, setCreate ] = useState(false);

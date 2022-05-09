@@ -1,17 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import { Box, Button, AppBar, Divider, FormControl } from '@mui/material';
-import CssBaseline from "@mui/material/CssBaseline";
-import Graph from './Data/Graph';
-import LineGraph from './Data/LineGraph';
+import { Box, Button, FormControl } from '@mui/material';
 import { useNavigate } from 'react-router';
-import DataSelectionContainer from '../containers/DataSelectionContainer';
-import LineGraphContainer from '../containers/LineGraphContainer';
-import { getMetricData } from '../utils/fetchUtils';
+import DataSelectionContainer from './DataSelectionContainer';
+import LineGraphContainer from './LineGraphContainer';
 
-const Home = (props) => {
-  // const [ color, setColor ] = useState('#007bff')
+const MetricsPage = (props) => {
   useEffect(() => { document.body.style.backgroundColor = 'white' }, [])
-  // 
+
   const [funcsLoaded, setFuncsLoaded] = useState(Object.keys(props.funcData).length > 0);
   useEffect(() => {
     setFuncsLoaded(Object.keys(props.funcData).length > 0);
@@ -36,9 +31,6 @@ const Home = (props) => {
   const handleLogClick = useCallback(() => navigate('/logs', {replace: true}), [navigate]);
   return(
     <div className= "homePage">
-      {/* <AppBar>
-        <h5>home</h5>
-      </AppBar> */}
       <FormControl sx={{ m: 1, width: 200 }}>
         <Button variant="contained" color= 'secondary' onClick= {handleLogClick} >Go to Logs</Button>
         {funcsLoaded && <DataSelectionContainer 
@@ -50,17 +42,13 @@ const Home = (props) => {
         />}
       </FormControl>
       <Box>
-      {/* <FormControl> */}
-      {/* <Graph /> */}
       {dataLoaded && <LineGraphContainer displayProps={displayProps} funcData={props.funcData} />}
-      {/* <LineGraph /> */}
-      {/* </FormControl> */}
       </Box>
     </div>
   )
 }
 
-export default Home;
+export default MetricsPage;
 
  // useEffect(() => {
   //   if (funcsLoaded) {

@@ -1,10 +1,9 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import { useNavigate } from 'react-router';
 import { Button } from '@mui/material';
-import { getLogs } from '../utils/fetchUtils';
-import LogSelectionContainer from '../containers/LogSelectionContainer';
+import LogSelectionContainer from './LogSelectionContainer';
 
-const Logs = (props) => {
+const LogsPage = (props) => {
   //this allows for navigation back to home route when the 'back' button is clicked
   
   const [funcsLoaded, setFuncsLoaded] = useState(Object.keys(props.funcData).length > 0);
@@ -16,17 +15,11 @@ const Logs = (props) => {
   useEffect(() => {
     if (funcsLoaded) setFunctionNames(Object.keys(props.funcData));
   }, [funcsLoaded]);
-  
-  // useEffect(() => {
-  //   const startTime = Math.floor(Date.now() - (1000*60*60*24*7));
-  //   const func = 'myloop';
-  //   getLogs(() => {return}, func, startTime);
-  // });
 
   const [dataLoaded, setDataLoaded] = useState(false);
   
   const navigate = useNavigate();
-  const handleBackClick = useCallback(() => navigate('/home', {replace: true}), [navigate]);
+  const handleBackClick = useCallback(() => navigate('/metrics', {replace: true}), [navigate]);
 
   return(
     <div>
@@ -36,4 +29,4 @@ const Logs = (props) => {
   )
 }
 
-export default Logs;
+export default LogsPage;
