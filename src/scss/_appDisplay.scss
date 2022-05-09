@@ -52,3 +52,22 @@ body{
   display: flex;
   flex-direction: column;
 }
+
+.logsHeaderRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerItem {
+  display: inline;
+  font-weight: bold;
+}
+
+.messageRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.messageRowItem {
+  display: inline;
+}

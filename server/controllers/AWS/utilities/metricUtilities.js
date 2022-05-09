@@ -16,8 +16,8 @@ const utilities = {};
 
 utilities.prepAndSend = (start, end, funcs, metrics) => {
   params = {
-    EndTime: new Date(end * 1000),
-    StartTime: new Date(start * 1000),
+    EndTime: new Date(end),
+    StartTime: new Date(start),
     MetricDataQueries: []
   };
 

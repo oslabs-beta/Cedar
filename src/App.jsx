@@ -10,7 +10,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { getFuncs, getLogs } from "./utils/fetchUtils";
+import { getFuncs } from "./utils/fetchUtils";
 
 
 
@@ -89,10 +89,10 @@ const themeDark = createTheme({
  */
 const App = () => {
   
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
   const [login, setLogin] = useState(false);
   const [theme, setTheme] = useState(themeLight);
 
@@ -104,9 +104,9 @@ const App = () => {
       getFuncs(setFunctionData);
   }}, [login]);
 
-  useEffect(() => {
-    console.log(functionData)
-  }, [functionData]);
+  // useEffect(() => {
+  //   console.log(functionData)
+  // }, [functionData]);
   // useEffect(() => {
   //   if(functionData.length > 0) setFunctionNames(functionData.map(func => func.functionName));
   // }, [functionData]);
@@ -131,7 +131,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Lobby loggedIn={login} setLogin={setLogin}/>} />
           <Route path="/home" element={<Home funcData={functionData} setFunctionData={setFunctionData} />} />
-          <Route path="/logs" element={<Logs funcData={functionData}/>} />
+          <Route path="/logs" element={<Logs funcData={functionData} setFunctionData={setFunctionData}/>} />
         </Routes>
       </ThemeProvider>
     </>
