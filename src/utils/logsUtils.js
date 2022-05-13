@@ -313,7 +313,10 @@ const inputArr = [
 // {
 //     <logStreamName1>: {
 //       IngestionTime: timestamp
-//       Start: ‘start message’
+//       Start: {
+    //      time:
+    //      start message:
+     //       }
 //       End: ‘end message
 //       Report:
 //       hasError: false
@@ -327,7 +330,7 @@ const inputArr = [
 //input = arr of obj
 //output = obj
 
-function readLog(inputArr){
+export const readLog = (inputArr) => {
   const outputObj = {};
   //loop thru inputArr
   for(let i = 0; i < inputArr.length; i++){
@@ -380,7 +383,7 @@ function readLog(inputArr){
   return outputObj;
 }
 
-readLog(inputArr);
+//readLog(inputArr);
 // console.log(readLog(inputArr));
 
 // Start: currObj[message]
