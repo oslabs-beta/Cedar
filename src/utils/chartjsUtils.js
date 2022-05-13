@@ -72,8 +72,22 @@ export const createLineGraphProps = (title, xUnit, xMin, yMin, labels, datasets)
   return { title, xUnit, xMin, yMin, labels, datasets }
 }
 
+/**
+ * Colors to be used for each series in a single line graph
+ */
 const COLORS = ['green', 'purple', 'pink', 'orange', 'blue', 'red', 'yellow'];
 
+/**
+ * Creates the props needed to render a chart.js LineGraph in the app, given data
+ * held in state and user selections. 
+ * @param {object} rawData - Cache of AWS Lambda metric data stored in state
+ * @param {array} metrics - Metrics selected by user to display as ine graphs
+ * @param {array} functions - Functions selected by user to display in each line graph
+ * @param {array} timestamps - x-axis values for the line graphs in Unix time (ms)
+ * @param {array} firstTimeStamp - minimum x-axis value for line graphs in Unix time (ms
+ * @param {string} unitName - x-axis timestep unit
+ * @returns {array} An array of objects, each being the props to pass down to an individual line graph component
+ */
 export const prepGraphFromRawData = (rawData, metrics, functions, timestamps, firstTimeStamp, unitName) => {
   return metrics.map(metric => {
     return createLineGraphProps(
