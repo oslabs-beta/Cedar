@@ -33,3 +33,10 @@ export const periods = {
 export const roundingUtil = (num, roundUnit) => {
   return (Math.floor(num / roundUnit)) * roundUnit;
 }
+
+export const dateTime = (timestamp) => {
+  let date = new Date(timestamp);
+  return date.toDateString();
+}
+
+//console.log(dateTime(1651779434756));

@@ -120,7 +120,7 @@ const App = () => {
 
   return (
     <>
-      <ThemeProvider theme={ themeLight }>
+      <ThemeProvider theme={ themeDark }>
         <CssBaseline />
         {/* <AppBar>
           <h5>home</h5>
