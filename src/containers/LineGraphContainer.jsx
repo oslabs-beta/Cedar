@@ -1,7 +1,7 @@
 import React from "react";
 import { periods, roundingUtil } from '../utils/conversions';
 import LineGraph from '../components/LineGraph';
-import { mapDatatoTimestamps, createDataset, createLineGraphProps, generateTimestamps, prepGraphFromRawData } from "../utils/chartjsUtils";
+import { generateTimestamps, prepGraphFromRawData } from "../utils/chartjsUtils";
 
 const COLORS = ['green', 'purple', 'pink', 'orange', 'blue', 'red', 'yellow'];
 
@@ -15,7 +15,7 @@ function LineGraphContainer(props) {
   // determine the x axis time unit given the period
   const unitName = periods[period].unitName;
   const unitTime = periods[period].unitMs;
-  
+
   // get first timestamp as the startTime, rounded based on the unit
   const firstTimeStamp = roundingUtil(startTime, periods[period].unitMs);
   const endTimeStamp = roundingUtil(Date.now(), periods[period].unitMs);
