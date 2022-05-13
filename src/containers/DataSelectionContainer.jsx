@@ -2,26 +2,12 @@ import React, {useState} from 'react';
 import { OutlinedInput, InputLabel, MenuItem, FormControl, ListItemText, Checkbox, Button } from '@mui/material';
 import Select from '@mui/material/Select';
 import { getMetricData } from '../utils/fetchUtils';
-import { timeConversions as tc } from '../utils/conversions';
+import { periods } from '../utils/conversions';
 
 const METRICS = ['Invocations', 'Throttles', 'Errors', 'Duration'];
-const PERIODS = {
-  'One Hour': tc.msPerHr,
-  'Three Hours': tc.msPerHr*3,
-  'Six Hours': tc.msPerHr*6,
-  'One Day': tc.msPerDay,
-  'Three Days': tc.msPerDay*3,
-  'One Week': tc.msPerWeek,
-  'Two Weeks': tc.msPerWeek*2,
-  '30 Days': tc.msPerDay*30,
-  'Custom': null
-};
+const PERIODNAMES = Object.keys(periods);
 
-const PERIODARR = [];
-for(let period in PERIODS) {
-  PERIODARR.push(period)
-}
-
+// Formatting for MUI dropdowns rendered in container
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -33,8 +19,16 @@ const MenuProps = {
   },
 };
 
+/**
+ * DataSelectionContainer component
+ * Renders 3 dropdown menus with which user can select functions, metrics, and duration to request from AWS Cloudwatch.
+ * Upon submission, will begin process of requesting data from AWS, updating App state upon receipt, and rendering line graphs with received data. 
+ */
 const DataSelectionContainer = (props) => {
 
+  /**
+   * 3 pieces of state below (funcName, metricName, period) hold the user's Dropdown selections in an array. 
+   */
   const [funcName, setFuncName] = useState([]);
   const handleFuncChange = (event) => {
     const {
@@ -43,7 +37,6 @@ const DataSelectionContainer = (props) => {
     setFuncName(
       typeof value === 'string' ? value.split(',') : value,
     );
-    // setFuncName(props.funcNames.indexOf(value) !== 0 ? value.split(' ,') : value);
   };
 
   const [metricName, setMetricName] = useState([]);
@@ -62,9 +55,15 @@ const DataSelectionContainer = (props) => {
     setPeriod(typeof value === 'string' ? value.split(',') : value);
   };
 
+  /**
+   * Handler to be executed upon user submission of form data - 
+   * Initiates fetch request for data to backend, and updates state info needed for graph display
+   */
   const getMetrics = () => {
+    // dataLoaded state in MetricsPage must be false before requesting new data
+    // otherwise, the page will try to render a line graph before data is received
     props.setDataLoaded(false);
-    const startTime = Math.floor(Date.now() - PERIODS[period[0]]);
+    const startTime = Math.floor(Date.now() - periods[period[0]].ms);
     getMetricData(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, metricName, startTime);
     props.setDisplayProps({
       functions: funcName,
@@ -127,7 +126,7 @@ const DataSelectionContainer = (props) => {
           MenuProps={MenuProps}
         >
 
-         {PERIODARR.map((period) => (
+         {PERIODNAMES.map((period) => (
             <MenuItem key={period} value={period}>
               <ListItemText primary={period} />
             </MenuItem>
