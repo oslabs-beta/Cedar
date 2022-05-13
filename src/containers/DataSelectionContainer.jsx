@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { OutlinedInput, InputLabel, MenuItem, FormControl, ListItemText, Checkbox, Button } from '@mui/material';
 import Select from '@mui/material/Select';
 import { getMetricData } from '../utils/fetchUtils';
-import { timeConversions as tc, periods } from '../utils/conversions';
+import { periods } from '../utils/conversions';
 
 const METRICS = ['Invocations', 'Throttles', 'Errors', 'Duration'];
 const PERIODNAMES = Object.keys(periods);
