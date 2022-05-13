@@ -23,15 +23,16 @@ ChartJS.register(
   Legend
 );
 
-// props: metric: str, funcs: {name:{timestamps, vals}, {}}, period
-// props: x & y mins and max
-// processing: given a period, determine:
-  // x axis scale and new timestamps for that period - DONE
-  // y axis vals for each function in each new timestamp - DONE
-  // outputs - new labels array, array of functions, each an obj with name, values, maybe some other stuff
-function  LineGraph (props) {
-  const { timestamps, unitName, timeMin, metricName, functions } = props.dataProp;
 
+/**
+ * LineGraph component.
+ * Renders a line graph displaying metric data for input functions over time. 
+ * Uses the react-chartjs-2 library <Line /> implementation of the chart.js LineGraph chart. 
+ */
+function  LineGraph (props) {
+  const { title, xUnit, xMin, yMin, labels, datasets } = props.dataProp;
+
+  // set options for chart.js LineGraph components
   const options = {
     responsive: true,
     plugins: {
@@ -39,19 +40,19 @@ function  LineGraph (props) {
         position: 'bottom',
       },
       title: {
-        text: metricName
+        text: title
       },
     },
     scales: {
       x: {
         type: 'time',
         time: {
-          unit: unitName,
+          unit: xUnit,
         },
-        min: timeMin,
+        min: xMin,
       },
       y: {
-        min: 0,
+        min: yMin,
       }
     },
     cubicInterpolationMode: 'monotone',
@@ -62,8 +63,8 @@ function  LineGraph (props) {
       <Line className='testChart'
         options={options}
         data={{
-          labels: timestamps,
-          datasets: functions,
+          labels,
+          datasets,
         }}
       />
     </div>
