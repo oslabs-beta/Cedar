@@ -1,3 +1,6 @@
+/**
+ * Mapping of time unit conversions
+ */
 export const timeConversions = {
   msPerSec: 1000,
   secPerMin: 60,
@@ -10,6 +13,13 @@ export const timeConversions = {
   msPerWeek: 1000*60*60*24*7,
 };
 
+/**
+ * Create object with various associated with user selection options for time periods
+ * @param {number} ms - milliseconds in the time period
+ * @param {string} unitName - name of the time step unit to be used for the x-axis in Chart.js
+ * @param {number} unitMs - milliseconds in the unitName timestep 
+ * @returns An object with the function params as keys and the args as values
+ */
 const periodAttributes = (ms, unitName, unitMs) => {
   return {
     ms,
@@ -18,6 +28,9 @@ const periodAttributes = (ms, unitName, unitMs) => {
   }
 }
 
+/**
+ * Object mapping user selection options for time periods to various attributes
+ */
 export const periods = {
   'One Hour': periodAttributes(timeConversions.msPerHr, 'minute', timeConversions.msPerMin),
   'Three Hours': periodAttributes(timeConversions.msPerHr*3, 'minute', timeConversions.msPerMin),
@@ -30,6 +43,12 @@ export const periods = {
   'Custom': null
 };
 
+/**
+ * Rounding utility to round numbers down to a specified unit
+ * @param {number} num - the number to be rounding
+ * @param {number} roundUnit - the rounding unit
+ * @returns 
+ */
 export const roundingUtil = (num, roundUnit) => {
   return (Math.floor(num / roundUnit)) * roundUnit;
 }
