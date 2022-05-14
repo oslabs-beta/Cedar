@@ -1,29 +1,21 @@
-// body {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: #392b58;
-//   h1 {
-//     display: inline;
-//     width: 100%;
-//     font-family: sans-serif;
-//     color: #D4EDE8;
-//   }
-// }
-
-
-
-body{
+.lobbyPage {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // background-image: url('../images/WallpaperDog-10879441.jpg');
-  // background-size: cover;
+  background-image: url('../images/WallpaperDog-10879441.jpg');
+  background-size: cover;
+  position:absolute;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
 }
-
-.lobbyPage {
+.signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-image: url('../images/WallpaperDog-10879441.jpg');
   background-size: cover;
   position:absolute;
@@ -35,8 +27,6 @@ body{
 
 .homePage{
   background-color: white;
-  // width: 500px;
-  // height: 500px;
 }
 
 .app2 {
@@ -47,27 +37,4 @@ body{
   height: 600px;
   width: 1200px;
   background-color: white
-}
-.dataSelection {
-  display: flex;
-  flex-direction: column;
-}
-
-.logsHeaderRow {
-  display: flex;
-  justify-content: space-between;
-}
-
-.headerItem {
-  display: inline;
-  font-weight: bold;
-}
-
-.messageRow {
-  display: flex;
-  justify-content: space-between;
-}
-
-.messageRowItem {
-  display: inline;
 }

@@ -50,7 +50,6 @@ export const getMetricData = async (currFunctionData, setFunctionData, setDataLo
       }
     });
     const parsedData = await data.json();
-    // console.log(parsedData)
     const newFunctionData = {
       ...currFunctionData
     };
@@ -71,6 +70,15 @@ export const getMetricData = async (currFunctionData, setFunctionData, setDataLo
   }
 }
 
+/**
+ * Get requested AWS function log data from Cloudwatch
+ * @param {object} currFunctionData - current global state holding for aws function metric and log data
+ * @param {function} setFunctionData - setter function for aws function data state
+ * @param {function} setDataLoaded - setter function for determining if function data is loaded and ready for use
+ * @param {string} func - name of function for which to request logs
+ * @param {number} startTime - start time from which to request log data in Unix time (ms)
+ * @param {number} endTime @optional - end time until which to request log data in Unix time (ms)
+ */
 export const getLogs = async (currFunctionData, setFunctionData, setDataLoaded, func, startTime, endTime) => {
   if (!endTime) endTime = Math.floor(Date.now() / (1000*60))*(1000*60);
   try {
@@ -86,7 +94,6 @@ export const getLogs = async (currFunctionData, setFunctionData, setDataLoaded, 
       }
     });
     const parsedLogs = await logs.json();
-    console.log(parsedLogs);
     const newFunctionData = {
       ...currFunctionData
     }

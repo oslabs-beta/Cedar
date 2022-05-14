@@ -98,9 +98,24 @@ const App = () => {
   // 
   //const [logData, setLogData] = useState([]);
   useEffect(() => {
+    const sessionLogin = JSON.parse(window.sessionStorage.getItem('LOGIN'));
+    if (sessionLogin !== null) setLogin(sessionLogin);
+
+    const sessionFunctionData = JSON.parse(window.sessionStorage.getItem('FUNCTION_DATA'));
+    if (sessionFunctionData !== null) setFunctionData(sessionFunctionData);
+  }, [])
+  
+  useEffect(() => {
+    window.sessionStorage.setItem('LOGIN', JSON.stringify(login));
     if(login){
-      getFuncs(setFunctionData);
+      if (Object.keys(functionData).length === 0) {
+        getFuncs(setFunctionData);
+      }
   }}, [login]);
+
+  useEffect(() => {
+    window.sessionStorage.setItem('FUNCTION_DATA', JSON.stringify(functionData));
+  }, [functionData]);
 
   // useEffect(() => {
   //   console.log(functionData)
@@ -120,7 +135,7 @@ const App = () => {
 
   return (
     <>
-      <ThemeProvider theme={ themeLight }>
+      <ThemeProvider theme={ themeDark }>
         <CssBaseline />
         {/* <AppBar>
           <h5>home</h5>
