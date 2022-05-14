@@ -37,6 +37,22 @@ const MetricsPage = (props) => {
     period: null,
     startTime: null
   });
+
+  useEffect(() => {
+    const sessionDisplayProps = JSON.parse(window.sessionStorage.getItem('DISPLAY_PROPS'));
+    if (sessionDisplayProps !== null) setDisplayProps(sessionDisplayProps);
+
+    const sessionDataLoaded = JSON.parse(window.sessionStorage.getItem('DATA_LOADED'));
+    if (sessionDataLoaded !== null) setDataLoaded(sessionDataLoaded);
+  }, []);
+
+  useEffect(() => {
+    window.sessionStorage.setItem('DATA_LOADED', JSON.stringify(dataLoaded));
+  }, [dataLoaded])
+  
+  useEffect(() => {
+    window.sessionStorage.setItem('DISPLAY_PROPS', JSON.stringify(displayProps));
+  }, [displayProps])
   
   const navigate = useNavigate();
   const handleLogClick = useCallback(() => navigate('/logs', {replace: true}), [navigate]);
