@@ -7,8 +7,8 @@ const FilterSelection = (props) => {
   const typeEnd = [];
   const typeReport = [];
   const typeError = [];
-  for(let i = 0; i < props.rows.length; i++){
-    console.log('string:', props.rows[i].type, props.rows[i].type.length)
+  for(let i=0; i<props.rows.length; i++){
+    // console.log('string:', props.rows[i].type, props.rows[i].type.length)
     if(props.rows[i].type==='START'){
       typeStart.push(props.rows[i])
     } else if (props.rows[i].type=== 'END'){
@@ -30,8 +30,15 @@ const FilterSelection = (props) => {
     array= typeError;
   }
 
+  // const createTableByInvocation = (invocationTime, start, end, report, error) => {
+  //   return { invocationTime, start, end, report, error }
+  // }
+  // const rowsByInvocation = [];
+  //this needs to be an array of objects, each with properties invocationTime, start, end, report, error
+
   return (
     <div>
+      { props.type!== '' &&
       <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -57,6 +64,7 @@ const FilterSelection = (props) => {
         </TableBody>
       </Table>
     </TableContainer>
+    }
     </div>
   )
 }
