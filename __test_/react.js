@@ -1,5 +1,5 @@
 //https://www.freecodecamp.org/news/react-testing-library-tutorial-javascript-example-code/
-
+// https://github.com/testing-library/jest-dom#tocontainelement
 //import
 import React from 'React';
 import userEvent from '@testing-library/user-event';
@@ -8,7 +8,7 @@ import regeneratorRuntime from 'regenerator-runtime';
 
 //imports 
 import LineGraph from '../src/components/LineGraph';
-
+//Renders a line graph displaying metric data for input functions over time.   
 describe('Unit testing React presentational components', () => {
     describe('LineGraph', () => {
         let lGraph;
@@ -36,8 +36,19 @@ describe('Unit testing React presentational components', () => {
             },
             cubicInterpolationMode: 'monotone',
           };
+        //borrowing from Testing approach lecture where we are going thru lGraphProps defined above
           beforeAll(() => {
-            card = render(<LineGraph {...lGraphProps} />);      
+            lGraph = render(<LineGraph {...lGraphProps} />); 
+        //lGraphProps contains objects that will be rendered to line graph
+        //I'm aware that this test is (hopefully) rendering an object of objects and not a line graph 
+            test('renders an object of objects', () => {
+                for(const i in lGraphProps){
+                expect(lGraph.getByText(lGraphProps[i])).toBeInstanceOf(Node);
+                if(typeof(lGraphProps[i]) === 'object'){
+                    expect(lGraph.getByText(lGraph.(lGraphProps[i])).toBeInstanceOf(Node))
+                }
+                }
+            })   
           });
 
           //a graph is displayed as a <div> in console
@@ -49,14 +60,17 @@ describe('Unit testing React presentational components', () => {
     })
 })
 
-const lGraph = <canvas role="img" height="297" width="594" class="testChart" 
-style="display: block; box-sizing: border-box; height: 297px; width: 594px;"></canvas>
+//test using toHaveClass and toHaveAttribute from github jest-dom https://github.com/testing-library/jest-dom#tohaveattribute
+// const lGraph = <canvas role="img" height="297" width="594" class="testChart" 
+// style="display: block; box-sizing: border-box; height: 297px; width: 594px;"></canvas>
 
-test('renders line graph with correct properties', () => {
-    //lGraph is the <canvas> element
-    expect(lGraph).toHaveClass('testChart'); //lGraph should have a class assigned to testChart
-    expect(lGraph).toHaveAttribute('role', 'img'); //lGraph should have an attribute role assigned to img
-    //unsure if two lines below are necessary:
-    expect(lGraph).toHaveAttribute('role', expect.stringContaining('img')) //checks if attribute has specific value or partial match
-    expect(lGraph).toHaveClass('testChart', {exact: true}) //checks if element has exactly a set of classes
-  })
+// test('renders line graph with correct properties', () => {
+//     //lGraph is the <canvas> element
+//     expect(lGraph).toHaveClass('testChart'); //lGraph should have a class assigned to testChart
+//     expect(lGraph).toHaveAttribute('role', 'img'); //lGraph should have an attribute role assigned to img
+//     //unsure if two lines below are necessary:
+//     expect(lGraph).toHaveAttribute('role', expect.stringContaining('img')) //checks if attribute has specific value or partial match
+//     expect(lGraph).toHaveClass('testChart', {exact: true}) //checks if element has exactly a set of classes
+//   })
+
+
