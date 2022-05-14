@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import LogsHeader from '../components/LogsHeader';
-import MessageRow from '../components/MessageRow';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, InputLabel, MenuItem, FormControl, Select, Button } from '@mui/material';
 import { dateTime } from '../utils/conversions';
 import FilterSelection from './FilterSelection';
