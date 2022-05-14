@@ -6,10 +6,6 @@ import regeneratorRuntime from 'regenerator-runtime';
 
 //imports 
 import LineGraph from '../src/components/LineGraph';
-import LogsHeader from '../src/components/LogsHeader';
-import LogsHeaderItem from '../src/components/LogsHeaderItem';
-import MessageRow from '../src/components/MessageRow';
-import MessageRowItem from '../src/components/MessageRowItem';
 
 describe('Unit testing React presentational components', () => {
     describe('LineGraph', () => {
