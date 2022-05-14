@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
+<<<<<<< HEAD
 // import LogsHeader from '../components/LogsHeader';
 // import MessageRow from '../components/MessageRow';
+=======
+>>>>>>> dev
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, InputLabel, MenuItem, FormControl, Select, Button } from '@mui/material';
 import { dateTime } from '../utils/conversions';
 import FilterSelection from './FilterSelection';
@@ -21,23 +24,13 @@ const Messages = (props) => {
     let invokeDate = dateTime(message.ingestionTime);
     rows.push(createTable(invokeDate, type, messageText))
   })
-  //console.log(rows)
+  let reversed = [];
+  for(let i=rows.length -1; i>=0; i--){
+    reversed.push(rows[i])
+  };
+  //console.log(rows);
 
-  const createTableByInvocation = (invocationTime, start, end, report, error) => {
-    return { invocationTime, start, end, report, error }
-  }
-  
-  const rowsByInvocation = [];
   const readLogsResult = readLog(props.logs);
-  let cache = {}; //obj of objs
-  for(let key in readLogsResult){
-    for(let obj in readLogsResult[key]){
-      rowsByInvocation.push(createTableByInvocation(obj.IngestionTime, obj.Start, obj.End, obj.Report, obj.Error ))
-    }
-  }
-  console.log(rowsByInvocation);
-  console.log(readLogsResult);
-  //rows is an array of objects with 3 properties: invokeDate, type, messageText
   
   const [filter, setFilter] = useState('');
   const handleFilterChange = (event) => {
@@ -54,6 +47,13 @@ const Messages = (props) => {
   const [clicked, setClicked] = useState(false);
   const handleEnterClick = () => {
     setClicked(true)
+  }
+
+  let orderArray = [];
+  if(order === 'oldestFirst'){
+    orderArray = rows;
+  } else {
+    orderArray = reversed;
   }
 
     return(
@@ -74,6 +74,25 @@ const Messages = (props) => {
             <MenuItem value={'functionInstance'}>Per Invocation</MenuItem>
           </Select>
         </FormControl>
+
+
+         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">Sort By</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={order}
+          onChange={handleOrderChange}
+          label="Order"
+        >
+          <MenuItem value="">
+            <em>Newest First</em>
+          </MenuItem>
+          <MenuItem value={'oldestFirst'}>Oldest First</MenuItem>
+        </Select>
+      </FormControl> 
+
+
         {/* this will conditionally render if the filter selection is 'log type' */}
         { filter === 'logType' && 
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -108,7 +127,7 @@ const Messages = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {orderArray.map((row) => (
               <TableRow
                 key={row.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -123,7 +142,7 @@ const Messages = (props) => {
           </TableBody>
         </Table>
       </TableContainer>
-      : <FilterSelection rows={rows} type={type}/>    
+      : <FilterSelection rows={orderArray} type={type} reversed={reversed} readLogsResult={readLogsResult}/>    
     }
     </div> 
     )

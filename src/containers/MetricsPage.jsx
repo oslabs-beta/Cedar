@@ -59,8 +59,8 @@ const MetricsPage = (props) => {
   
   return(
     <div className= "homePage">
-      <FormControl sx={{ m: 1, width: 200 }}>
-        <Button variant="contained" color= 'secondary' onClick= {handleLogClick} >Go to Logs</Button>
+      <FormControl >
+        <Button sx={{ m: 1, width: 200 }} variant="contained" color= 'secondary' onClick= {handleLogClick} >Go to Logs</Button>
         {funcsLoaded && <DataSelectionContainer 
           funcNames={functionNames}
           funcData={props.funcData}
