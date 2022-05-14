@@ -38,9 +38,21 @@ function  LineGraph (props) {
     plugins: {
       legend: {
         position: 'bottom',
+        title: {
+          display: true,
+          text: 'AWS Lambda Functions',
+          font: {
+            size: 20,
+          },
+        }
       },
       title: {
-        text: title
+        display: true,
+        text: title,
+        align: 'center',
+        font: {
+          size: 32
+        },
       },
     },
     scales: {
