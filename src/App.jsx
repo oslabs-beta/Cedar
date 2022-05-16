@@ -1,16 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Lobby from './components/Lobby';
-//import { AppBar } from '@mui/material';
-import Signup from './components/Signup';
-import Home from './components/Home';
-import Logs from './components/Logs';
+import LobbyPage from './containers/LobbyPage';
+import MetricsPage from './containers/MetricsPage';
+import LogsPage from './containers/LogsPage';
 import {
   Routes,
   Route,
 } from "react-router-dom";
-import { getFuncs, getLogs } from "./utils/fetchUtils";
+import { getFuncs } from "./utils/fetchUtils";
 
 
 
@@ -89,10 +87,10 @@ const themeDark = createTheme({
  */
 const App = () => {
   
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
   const [login, setLogin] = useState(false);
   const [theme, setTheme] = useState(themeLight);
 
@@ -100,13 +98,28 @@ const App = () => {
   // 
   //const [logData, setLogData] = useState([]);
   useEffect(() => {
+    const sessionLogin = JSON.parse(window.sessionStorage.getItem('LOGIN'));
+    if (sessionLogin !== null) setLogin(sessionLogin);
+
+    const sessionFunctionData = JSON.parse(window.sessionStorage.getItem('FUNCTION_DATA'));
+    if (sessionFunctionData !== null) setFunctionData(sessionFunctionData);
+  }, [])
+  
+  useEffect(() => {
+    window.sessionStorage.setItem('LOGIN', JSON.stringify(login));
     if(login){
-      getFuncs(setFunctionData);
+      if (Object.keys(functionData).length === 0) {
+        getFuncs(setFunctionData);
+      }
   }}, [login]);
 
   useEffect(() => {
-    console.log(functionData)
+    window.sessionStorage.setItem('FUNCTION_DATA', JSON.stringify(functionData));
   }, [functionData]);
+
+  // useEffect(() => {
+  //   console.log(functionData)
+  // }, [functionData]);
   // useEffect(() => {
   //   if(functionData.length > 0) setFunctionNames(functionData.map(func => func.functionName));
   // }, [functionData]);
@@ -122,16 +135,16 @@ const App = () => {
 
   return (
     <>
-      <ThemeProvider theme={ themeLight }>
+      <ThemeProvider theme={ themeDark }>
         <CssBaseline />
         {/* <AppBar>
           <h5>home</h5>
         </AppBar> */}
         {/* <Lobby /> */}
         <Routes>
-          <Route path="/" element={<Lobby loggedIn={login} setLogin={setLogin}/>} />
-          <Route path="/home" element={<Home funcData={functionData} setFunctionData={setFunctionData} />} />
-          <Route path="/logs" element={<Logs funcData={functionData}/>} />
+          <Route path="/" element={<LobbyPage loggedIn={login} setLogin={setLogin}/>} />
+          <Route path="/metrics" element={<MetricsPage funcData={functionData} setFunctionData={setFunctionData} />} />
+          <Route path="/logs" element={<LogsPage funcData={functionData} setFunctionData={setFunctionData}/>} />
         </Routes>
       </ThemeProvider>
     </>

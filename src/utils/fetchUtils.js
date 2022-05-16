@@ -34,7 +34,7 @@ export const getFuncs = async (setFunctionData) => {
  * @param {number} startTime - unix time from which to begin pulling metrics data
  * @param {number} endTime - unix time until which to pulling metrics data. Defaults to now, rounded down to nearest minute.
  */
-export const getMetricData = async (currFunctionData, setFunctionData, functions, metrics, startTime, endTime) => {
+export const getMetricData = async (currFunctionData, setFunctionData, setDataLoaded, functions, metrics, startTime, endTime) => {
   if (!endTime) endTime = Math.floor(Date.now() / (1000*60))*(1000*60);
   try {
     const data = await fetch('/api/aws/getMetricData', {
@@ -50,7 +50,6 @@ export const getMetricData = async (currFunctionData, setFunctionData, functions
       }
     });
     const parsedData = await data.json();
-    console.log(parsedData)
     const newFunctionData = {
       ...currFunctionData
     };
@@ -65,12 +64,22 @@ export const getMetricData = async (currFunctionData, setFunctionData, functions
       });
     });
     setFunctionData(newFunctionData);
+    setDataLoaded(true);
   } catch (err) {
     console.log(err);
   }
 }
 
-export const getLogs = async (setFunctionData, func, startTime, endTime) => {
+/**
+ * Get requested AWS function log data from Cloudwatch
+ * @param {object} currFunctionData - current global state holding for aws function metric and log data
+ * @param {function} setFunctionData - setter function for aws function data state
+ * @param {function} setDataLoaded - setter function for determining if function data is loaded and ready for use
+ * @param {string} func - name of function for which to request logs
+ * @param {number} startTime - start time from which to request log data in Unix time (ms)
+ * @param {number} endTime @optional - end time until which to request log data in Unix time (ms)
+ */
+export const getLogs = async (currFunctionData, setFunctionData, setDataLoaded, func, startTime, endTime) => {
   if (!endTime) endTime = Math.floor(Date.now() / (1000*60))*(1000*60);
   try {
     const logs = await fetch('/api/aws/getLogsData', {
@@ -85,7 +94,12 @@ export const getLogs = async (setFunctionData, func, startTime, endTime) => {
       }
     });
     const parsedLogs = await logs.json();
-    console.log(parsedLogs);
+    const newFunctionData = {
+      ...currFunctionData
+    }
+    newFunctionData[func].logs = parsedLogs;
+    setFunctionData(newFunctionData);
+    setDataLoaded(true);
   } catch (err) {
     console.log(err);
   }

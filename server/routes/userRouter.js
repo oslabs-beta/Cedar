@@ -9,7 +9,7 @@ router.post('/login', userController.login, stsController.getCreds, (req, res) =
 });
 
 router.post('/signup', userController.signUp, (req, res) => {
-  res.status(200).send('signup successful');
+  res.redirect('/login');
 });
 
 module.exports = router;

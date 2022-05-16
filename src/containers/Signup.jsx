@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { TextField, Grid, Paper, Button, AppBar } from '@mui/material';
-import Lobby from './Lobby';
-import Home from './Home';
+import Lobby from './LobbyPage';
+import Home from './MetricsPage';
 
 const Signup = () => {
   const [ create, setCreate ] = useState(false);
@@ -22,7 +22,7 @@ const Signup = () => {
     return <Lobby />
   }
   return(
-    <>
+    <div className='signup'>
     <Grid>
       <Paper align= 'left' elevation= {10} style= {paperStyle}>
         <Grid align= 'center'>
@@ -36,7 +36,7 @@ const Signup = () => {
         <Button variant="text"  color= 'secondary' onClick= {handleCancelChange}>Cancel</Button>
       </Paper>
     </Grid>
-    </>
+    </div>
   )
   //function to handle the submit click, it will be an addUser post request to server probably passed from lobby
 

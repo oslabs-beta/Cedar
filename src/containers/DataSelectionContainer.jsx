@@ -1,26 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { OutlinedInput, InputLabel, MenuItem, FormControl, ListItemText, Checkbox, Button } from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import { getMetricData } from '../utils/fetchUtils';
-import { timeConversions as tc } from '../utils/conversions';
+import { periods } from '../utils/conversions';
 
-const METRICS = ['Invocations', 'Throttles', 'Errors', 'Duration']
-const PERIODS = {
-  'One Hour': tc.msPerHr,
-  'Three Hours': tc.msPerHr*3,
-  'Six Hours': tc.msPerHr*6,
-  'One Day': tc.msPerDay,
-  'Three Days': tc.msPerDay*3,
-  'One Week': tc.msPerWeek,
-  'Two Weeks': tc.msPerWeek*2,
-  '30 Days': tc.msPerDay*30,
-  'Custom': null
-}
-const PERIODARR = [];
-for(let period in PERIODS){
-  PERIODARR.push(period)
-}
+const METRICS = ['Invocations', 'Throttles', 'Errors', 'Duration'];
+const PERIODNAMES = Object.keys(periods);
 
+// Formatting for MUI dropdowns rendered in container
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -32,8 +19,16 @@ const MenuProps = {
   },
 };
 
+/**
+ * DataSelectionContainer component
+ * Renders 3 dropdown menus with which user can select functions, metrics, and duration to request from AWS Cloudwatch.
+ * Upon submission, will begin process of requesting data from AWS, updating App state upon receipt, and rendering line graphs with received data. 
+ */
 const DataSelectionContainer = (props) => {
 
+  /**
+   * 3 pieces of state below (funcName, metricName, period) hold the user's Dropdown selections in an array. 
+   */
   const [funcName, setFuncName] = useState([]);
   const handleFuncChange = (event) => {
     const {
@@ -42,32 +37,43 @@ const DataSelectionContainer = (props) => {
     setFuncName(
       typeof value === 'string' ? value.split(',') : value,
     );
-    // setFuncName(props.funcNames.indexOf(value) !== 0 ? value.split(' ,') : value);
-  }
+  };
+
   const [metricName, setMetricName] = useState([]);
   const handleMetricChange = (event) => {
     const {
       target: { value },
     } = event;
     setMetricName(typeof value === 'string' ? value.split(',') : value);
-  }
+  };
+
   const [period, setPeriod] = useState('');
   const handlePeriodChange = (event) => {
     const {
       target: { value },
     } = event;
     setPeriod(typeof value === 'string' ? value.split(',') : value);
-  }
+  };
 
+  /**
+   * Handler to be executed upon user submission of form data - 
+   * Initiates fetch request for data to backend, and updates state info needed for graph display
+   */
   const getMetrics = () => {
-    const startTime = Math.floor(Date.now() - PERIODS[period[0]]);
-    getMetricData(props.funcData, props.setFunctionData, funcName, metricName, startTime);
-  }
+    // dataLoaded state in MetricsPage must be false before requesting new data
+    // otherwise, the page will try to render a line graph before data is received
+    props.setDataLoaded(false);
+    const startTime = Math.floor(Date.now() - periods[period[0]].ms);
+    getMetricData(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, metricName, startTime);
+    props.setDisplayProps({
+      functions: funcName,
+      metrics: metricName,
+      period: period[0],
+      startTime: startTime
+    });
+  };
 
   return (
-    // <>
-    //   <h1>Metric options will go here</h1>
-    // </>
     <div className= 'dataSelection'>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-checkbox-label">Function(s)</InputLabel>
@@ -120,7 +126,7 @@ const DataSelectionContainer = (props) => {
           MenuProps={MenuProps}
         >
 
-         {PERIODARR.map((period) => (
+         {PERIODNAMES.map((period) => (
             <MenuItem key={period} value={period}>
               <ListItemText primary={period} />
             </MenuItem>
@@ -135,13 +141,3 @@ const DataSelectionContainer = (props) => {
 }
 
 export default DataSelectionContainer;
-
-{/* <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem> */}
-
-          {/* {PERIODS.map((period) => (
-            <MenuItem key={period} value={period}>
-              <ListItemText primary={period} />
-            </MenuItem>
-          ))} */}
