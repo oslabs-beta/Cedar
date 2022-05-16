@@ -47,12 +47,12 @@ describe('Unit testing React presentational components', () => {
                 for(const i in lGraphProps){
                 //expect the elements w/in the props to be an instance of Node (referencing the DOM node where component is mounted)
                 expect(lGraph.getByText(lGraphProps[i])).toBeInstanceOf(Node);
-                //if the typos of element w/in props object is and object
+                //if the type of element w/in props object is an object
                 if(typeof(lGraphProps[i]) === 'object'){
                     //expect that inner object to be an instance of Node
                     expect(lGraph.getByText(lGraph.lGraphProps[i])).toBeInstanceOf(Node);
                 }
-                }
+              }
             })   
           });
 
