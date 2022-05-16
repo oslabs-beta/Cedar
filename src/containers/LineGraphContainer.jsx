@@ -27,9 +27,9 @@ function LineGraphContainer(props) {
     return <LineGraph key={dataProp.title} dataProp={dataProp} />
   })
   return (
-    <>
+    <div id="graphsContainer">
       {LineGraphs}
-    </>
+    </div>
   )
 }
 
