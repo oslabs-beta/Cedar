@@ -47,12 +47,13 @@ export const mapDatatoTimestamps = ({ timestamps, values }, targetTimestamps) =>
  * @param {array} data - array of y-axis values for the function's dataset
  * @returns {object} - an object that can be used in a chart.js datasets array
  */
-export const createDataset = (funcName, color, data) => {
+export const createDataset = (funcName, color, pointStyle, data) => {
   return {
     id: funcName,
     label: funcName,
     backgroundColor: color,
     borderColor: color,
+    pointStyle: pointStyle,
     data: data
   }
 }
@@ -73,9 +74,10 @@ export const createLineGraphProps = (title, xUnit, xMin, yMin, labels, datasets)
 }
 
 /**
- * Colors to be used for each series in a single line graph
+ * Styles to be used in sequence for each series in a single line graph
  */
-const COLORS = ['green', 'purple', 'pink', 'orange', 'blue', 'red', 'yellow'];
+const COLORS = ['#88CCEE', '#DDCC77', '#CC6677', '#AA4499', '#882255', '#44AA99', '#332288'];
+const POINTSTYLE = ['circle', 'rect', 'star', 'triangle', 'crossRot', 'rectRot', 'cross'];
 
 /**
  * Creates the props needed to render a chart.js LineGraph in the app, given data
@@ -100,6 +102,7 @@ export const prepGraphFromRawData = (rawData, metrics, functions, timestamps, fi
         return createDataset(
           func,
           COLORS[i],
+          POINTSTYLE[i],
           mapDatatoTimestamps(rawData[func].metrics[metric], timestamps)
         )
       }),
