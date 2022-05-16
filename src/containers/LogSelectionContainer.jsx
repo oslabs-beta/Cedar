@@ -1,5 +1,5 @@
 import React, {useState, useCallback} from 'react';
-import { InputLabel, MenuItem, FormControl, ListItemText, Button } from '@mui/material';
+import { InputLabel, MenuItem, FormControl, ListItemText, Button, Box } from '@mui/material';
 import Select from '@mui/material/Select';
 import { getLogs } from '../utils/fetchUtils';
 import { timeConversions as tc } from '../utils/conversions';
@@ -61,7 +61,8 @@ const LogSelectionContainer = (props) => {
   const handleResetOptions = useCallback(() => navigate('/logs', {replace: true}), [navigate]);
   
   return (
-    <div>
+    <div className='logSelection' >
+      <Box pt={2} >
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-simple-select-label">Function</InputLabel>
         <Select
@@ -97,10 +98,13 @@ const LogSelectionContainer = (props) => {
           ))}
         </Select>
       </FormControl>
-      <FormControl>
+      <FormControl >
+        <Box p={1} pt={2}>
         <Button variant="contained" color= 'secondary' onClick= {getLogsNow}>Go</Button>
+        </Box>
       </FormControl>
       {props.dataLoaded && <Messages logs={props.funcData[funcName].logs}/>}
+      </Box>
       </div>
   )
 }
