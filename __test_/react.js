@@ -38,6 +38,7 @@ describe('Unit testing React presentational components', () => {
             cubicInterpolationMode: 'monotone',
           };
         //borrowing from Testing approach lecture where we are going thru lGraphProps defined above
+        //beforeAll or beforeEach (unsure which....) (delete this later pls)
           beforeAll(() => {
             lGraph = render(<LineGraph {...lGraphProps} />); 
         //lGraphProps contains objects that will be rendered to line graph
@@ -47,12 +48,12 @@ describe('Unit testing React presentational components', () => {
                 for(const i in lGraphProps){
                 //expect the elements w/in the props to be an instance of Node (referencing the DOM node where component is mounted)
                 expect(lGraph.getByText(lGraphProps[i])).toBeInstanceOf(Node);
-                //if the typos of element w/in props object is and object
+                //if the type of element w/in props object is an object
                 if(typeof(lGraphProps[i]) === 'object'){
                     //expect that inner object to be an instance of Node
                     expect(lGraph.getByText(lGraph.lGraphProps[i])).toBeInstanceOf(Node);
                 }
-                }
+              }
             })   
           });
 
@@ -78,4 +79,5 @@ test('renders line graph with correct properties', () => {
     expect(lGraph).toHaveClass('testChart', {exact: true}) //checks if element has exactly a set of classes
   })
 
+  
 
