@@ -1,3 +1,6 @@
+// body {
+//   display: flex;
+// }
 .lobbyPage {
   display: flex;
   flex-direction: column;
@@ -27,6 +30,8 @@
 
 .homePage{
   background-color: rgb(2, 52, 48);
+  display: flex;
+  flex-direction: column;
 }
 
 .app2 {
@@ -50,4 +55,14 @@
       border-radius: 20px;
     }
   }
+}
+
+.logSelection {
+  // display: flex;
+  padding-left: 1cm;
+}
+
+.dataSelection {
+  display: flex;
+  padding-left: 1cm;
 }

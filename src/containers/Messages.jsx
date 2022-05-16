@@ -26,6 +26,7 @@ const Messages = (props) => {
   //console.log(rows);
 
   const readLogsResult = readLog(props.logs);
+  // console.log(readLogsResult);
   
   const [filter, setFilter] = useState('');
   const handleFilterChange = (event) => {
@@ -63,10 +64,9 @@ const Messages = (props) => {
             label="Filter"
           >
             <MenuItem value="">
-              <em>Log Time</em>
+              <em>All Logs</em>
             </MenuItem>
             <MenuItem value={'logType'}>Log Type</MenuItem>
-            <MenuItem value={'functionInstance'}>Per Invocation</MenuItem>
           </Select>
         </FormControl>
 

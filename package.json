@@ -23,6 +23,7 @@
     "@aws-sdk/client-lambda": "^3.78.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.3",
     "@reduxjs/toolkit": "^1.8.1",
     "bcrypt": "^5.0.1",
