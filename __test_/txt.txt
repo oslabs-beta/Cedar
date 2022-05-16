@@ -1,0 +1,16 @@
+deleted the following from pacakge.json under script and replaced w/ "test": "jest"
+
+    // "test": "echo \"Error: no test specified\" && exit 1",
+
+-endpoint testing
+
+  was getting huge red error w/ this is the jest part of the package json : 
+    "testEnvironment": "jest-environment-jsdom",
+
+     "jest": {
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js",
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ]
+  },
