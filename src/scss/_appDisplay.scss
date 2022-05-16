@@ -29,24 +29,32 @@
 }
 
 .homePage{
+  background-color: rgb(2, 52, 48);
   display: flex;
   flex-direction: column;
-  background-color: white;
 }
 
 .app2 {
   background-color: white;
 }
 
-.testChart {
+#graphsContainer {
   display: flex;
-  height: 600px;
-  width: 1200px;
-  background-color: white
-}
-
-.lineChartContainer {
-  width: 1200px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  // flex-direction: column;
+  .lineGraphContainer {
+    min-width: 700px;
+    width: 75vw;
+    max-width: 1500px;
+    margin: 10px 10px;
+    .lineGraph{
+      padding: 5vh;
+      background-color: rgb(17, 97, 73);
+      border-radius: 20px;
+    }
+  }
 }
 
 .logSelection {
