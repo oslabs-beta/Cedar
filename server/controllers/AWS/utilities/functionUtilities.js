@@ -5,7 +5,15 @@ const {
   ListFunctionsCommand 
 } = require('@aws-sdk/client-lambda');
 
-const creds = require('./creds.js');
+// const creds = require('./creds.js');
+
+const creds = {
+  region: 'us-east-1',
+  credentials: {
+    accessKeyId: 'ASIATPE5RJNP34STUHZG',
+    secretAccessKey: 'BkxTzwld70ahlJksV5nGJg+yD7yk0XexpRuAdZ6f'
+  }
+}
 
 // initiate a client as a new lambda client with credentials object
 const lambdaClient = new LambdaClient(creds);
