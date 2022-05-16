@@ -1,3 +1,6 @@
+// body {
+//   display: flex;
+// }
 .lobbyPage {
   display: flex;
   flex-direction: column;
@@ -26,6 +29,8 @@
 }
 
 .homePage{
+  display: flex;
+  flex-direction: column;
   background-color: white;
 }
 
@@ -34,7 +39,22 @@
 }
 
 .testChart {
+  display: flex;
   height: 600px;
   width: 1200px;
   background-color: white
+}
+
+.lineChartContainer {
+  width: 1200px;
+}
+
+.logSelection {
+  // display: flex;
+  padding-left: 1cm;
+}
+
+.dataSelection {
+  display: flex;
+  padding-left: 1cm;
 }
