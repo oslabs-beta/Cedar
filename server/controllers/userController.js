@@ -15,6 +15,7 @@ userController.signUp = async (req, res, next) => {
   try{ 
     //make query to db
     await User.create({username, password, arn, region});
+    console.log('yay you signed up woopdie do!')
     return next();
   } catch (err) {
     return next({
@@ -27,6 +28,8 @@ userController.signUp = async (req, res, next) => {
 //login controller
 userController.login = async (req, res, next) => {
   const { username, password } = req.body;
+  console.log('here is username', username);
+  console.log('here is password', password);
   try{
     //save awaited db response to variable to use with bcrypt compare
     const data = await User.findOne({username});
@@ -39,7 +42,7 @@ userController.login = async (req, res, next) => {
     //if verified returns false throw and error
     if (!verified) throw new Error ('username or password is incorrect');
     const { arn, region } = data
-    res.locals.arn = arn
+    res.locals.info = {arn, region};
     return next();
   } catch (err) {
     return next({

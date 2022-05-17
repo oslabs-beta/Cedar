@@ -6,14 +6,27 @@ const functionController = {};
 
 functionController.getFuncs = async (req, res, next) => {
   try {
+    const { region } = res.locals.info
+    const { accessKeyId, secretAccessKey } = res.locals.creds
+
     //declare params 
     const params = {
       FunctionVersion: 'ALL',
     };
 
+    //set up creds to be passed into the lambda client
+    const creds = {
+      region: region,
+      credential: {
+        accessKeyId: accessKeyId,
+        secretAccessKey: secretAccessKey
+      }
+    }
+
     //attatch the result of calling the sendCommand func to res.locals
     //sendCommand is located in the utilities directory in the functionUtilities file
-    res.locals.lambdaFuncs = await utilities.sendCommand(params);
+    const lambdaFuncs = await utilities.sendCommand(params, creds);
+    res.locals.data = {creds, lambdaFuncs };
     console.log('~~~SUCCESS~~~')
     return next();
   } catch (err) {

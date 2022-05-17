@@ -5,16 +5,20 @@ const {
   AssumeRoleCommand 
 } = require("@aws-sdk/client-sts");
 
-const creds = require('./creds.js');
-
 const utilities = {};
 
 /* ~~~~~~~~~~ * PREP AND SEND COMMAND * ~~~~~~~~~~ */
 
 utilities.prepAndSend = async (arn, region) => {
 
+  console.log('here is region', region)
+  console.log('here is arn', arn)
+  
+  const creds = {
+    region: 'us-east-1',
+  }
   //declare a client as a new STS client passing in creds
-  const stsClient = new STSClient(region);
+  const stsClient = new STSClient(creds);
 
   //declare params to pass into the assume role command
   //these will be a string indicating the session name 
@@ -23,7 +27,7 @@ utilities.prepAndSend = async (arn, region) => {
     RoleSessionName: 'Cedar_Session',
     RoleArn: arn
   }
-
+  console.log('params', params)
   const command = new AssumeRoleCommand(params)
 
   const data = await stsClient.send(command)

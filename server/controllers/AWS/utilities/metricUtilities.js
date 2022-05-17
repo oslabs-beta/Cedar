@@ -5,16 +5,16 @@ const {
   GetMetricDataCommand
 } = require('@aws-sdk/client-cloudwatch');
 
-const creds = require('./creds.js');
-
-//declare a client as a new cloudwatch client passing in creds object
-const metricClient = new CloudWatchClient(creds);
 
 const utilities = {};
 
 /* ~~~~~~~~~~ * PARAMETER PREP * ~~~~~~~~~~*/
 
-utilities.prepAndSend = (start, end, funcs, metrics) => {
+utilities.prepAndSend = (start, end, funcs, metrics, creds) => {
+
+  //declare a client as a new cloudwatch client passing in creds object
+  const metricClient = new CloudWatchClient(creds);
+
   params = {
     EndTime: new Date(end),
     StartTime: new Date(start),
@@ -51,12 +51,12 @@ utilities.prepAndSend = (start, end, funcs, metrics) => {
     }
   }
   //call the sendCommand function passing in the prepped parameters
-  return utilities.sendCommand(params);
+  return utilities.sendCommand(metricClient, params);
 }
 
 /* ~~~~~~~~~~ * SEND COMMAND * ~~~~~~~~~~ */
 
-utilities.sendCommand = async (params, dataArr = [], nextToken = null) => {
+utilities.sendCommand = async (metricClient, params, dataArr = [], nextToken = null) => {
   //if nextToken is not null, add it to params
   if (nextToken) params.NextToken = nextToken;
 

@@ -5,19 +5,18 @@ const {
 	FilterLogEventsCommand, 
 } = require('@aws-sdk/client-cloudwatch-logs');
 
-const creds = require('./creds.js')
-
-//declare a client as an new coutwatch logs client passing in credentials
-const cloudWatchLogsClient = new CloudWatchLogsClient(creds);
-
 const utilities = {};
 
 /* ~~~~~~~~ * SEND COMMAND FUNCTION * ~~~~~~~~ */
 
-utilities.sendCommand = async (params, data = [], nextToken = null) => {
+utilities.sendCommand = async (creds, params, data = [], nextToken = null) => {
   //declare param variable set to value of prepParms function
   // const params = await prepParams(start, end, func, ...args);
   if (nextToken) params.nextToken = nextToken
+
+  //declare a client as an new coutwatch logs client passing in credentials
+  const cloudWatchLogsClient = new CloudWatchLogsClient(creds);
+
   //declare command initialized to be a new filter log event command 
   const command = new FilterLogEventsCommand(params);
 

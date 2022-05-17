@@ -8,7 +8,7 @@ metricController.getMetrics = async (req, res, next) => {
   try {
     //pull variables off of req.body
     //funcs and metrics will be arrays
-    const { start, end, funcs, metrics } = req.body;
+    const { start, end, funcs, metrics, creds } = req.body;
     
     //create an object that will represent each function with a unique key
     //we will use this to make parsing through our data more seamless
@@ -19,7 +19,7 @@ metricController.getMetrics = async (req, res, next) => {
 
     //call prep and send function in the utilites folder in the metricUtilities.js file
     //this will prep parameters and send the getMetricDataCommand command to retrieve lambda metrics
-    const response = await utilities.prepAndSend(start, end, funcs, metrics);
+    const response = await utilities.prepAndSend(start, end, funcs, metrics, creds);
 
     //attatch the invocation of the parse data function onto res.locals
     //parseData is in the utilites folder in the metricUtilities.js file
