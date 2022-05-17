@@ -64,7 +64,6 @@
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
     "nodemon": "^2.0.16",
-    "resize-observer-polyfill": "^1.5.1",
     "sass": "^1.50.1",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",

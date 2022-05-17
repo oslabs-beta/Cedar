@@ -11,6 +11,13 @@ import regeneratorRuntime from 'regenerator-runtime';
 import LineGraph from '../src/components/LineGraph';
 //Renders a line graph displaying metric data for input functions over time.   
 describe('Unit testing React presentational components', () => {
+  window.ResizeObserver =
+    window.ResizeObserver ||
+    jest.fn().mockImplementation(() => ({
+        disconnect: jest.fn(),
+        observe: jest.fn(),
+        unobserve: jest.fn(),
+    }));
   describe('LineGraph', () => { //describe the line graph
     let lGraph;
     const lGraphProps = {
@@ -82,8 +89,8 @@ describe('Unit testing React presentational components', () => {
     test('renders a canvas element containing a line graph', () => { // run the test
         // grab the canvas element
         //querying graph to get the role that has 'img' in it and assign it to constant graph
-        const graph = lGraph.getByRole('img')
-        expect(graph).toHaveClass('lineGraph')  
+        const graph = lGraph.getByRole('img');
+        expect(graph).toHaveClass('lineGraph');
     })   
   });      
 });
