@@ -22,7 +22,7 @@ app.use('/api/aws', awsRouter)
 // Production app entry:
 //    serve index.js as static file
 //    serve index.html app entry
-if(process.env.NODE_ENV === 'production'){
+if(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
   app.use('/build', express.static(path.join(__dirname, '../build')));
   // serve index.html on the route '/'
   app.get('/', (req, res) => {

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { OutlinedInput, InputLabel, MenuItem, FormControl, ListItemText, Checkbox, Button } from '@mui/material';
+import { Box, OutlinedInput, InputLabel, MenuItem, FormControl, ListItemText, Checkbox, Button } from '@mui/material';
 import Select from '@mui/material/Select';
 import { getMetricData } from '../utils/fetchUtils';
 import { periods } from '../utils/conversions';
@@ -75,6 +75,7 @@ const DataSelectionContainer = (props) => {
 
   return (
     <div className= 'dataSelection'>
+      <Box pt={3} pb={3}>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-checkbox-label">Function(s)</InputLabel>
         <Select
@@ -136,6 +137,7 @@ const DataSelectionContainer = (props) => {
       <FormControl>
         <Button variant="contained" color= 'secondary' onClick={getMetrics} >Go</Button>
       </FormControl>
+      </Box>
     </div>
   )
 }

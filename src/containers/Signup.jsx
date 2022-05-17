@@ -44,15 +44,13 @@ const Signup = (props) => {
         <Grid align= 'center'>
           <h3>Sign Up</h3>
         </Grid>
-        <TextField label='Username' placeholder='Create Username' fullwidth="true" 
-          label="Username"
+        <TextField label='Username' placeholder='Create Username' fullwidth="true"
           id="createUser"
           value={props.user}
           onChange={props.handleUserCreate}
         />
         <h4></h4>
         <TextField label='Password' placeholder='Create Password' fullwidth="true"
-        label="Password"
         id="createPass"
         value={props.pass}
         onChange={props.handlePassCreate}
@@ -62,14 +60,12 @@ const Signup = (props) => {
         <SvgIcon component={HelpOutlineIcon} color='secondary' onClick={handleHelpClick}/>
         <h4></h4>
         <TextField label='ARN' placeholder='Enter ARN' fullwidth="true" 
-        label="ARN"
         id="createArn"
         value={props.arn}
         onChange={props.handleArnCreate}
         />
         <h4></h4>
         <TextField label='Region' placeholder='Enter region' fullwidth="true" 
-        label="Region"
         id="createRegion"
         value={props.region}
         onChange={props.handleRegionCreate}

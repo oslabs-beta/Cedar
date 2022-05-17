@@ -31,6 +31,7 @@ const themeLight = createTheme({
 const themeDark = createTheme({
   palette: {
     type: 'dark',
+    // mode: 'dark',
     primary: {
       main: '#57bfd8',
     },

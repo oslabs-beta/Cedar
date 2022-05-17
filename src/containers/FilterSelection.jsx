@@ -29,7 +29,8 @@ const FilterSelection = (props) => {
   } else if(props.type === 'error'){
     array= typeError;
   }
-
+  
+  //props.readLogsResult
   // const createTableByInvocation = (invocationTime, start, end, report, error) => {
   //   return { invocationTime, start, end, report, error }
   // }

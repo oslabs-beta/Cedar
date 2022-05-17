@@ -15,7 +15,7 @@ utilities.prepAndSend = (start, end, funcs, metrics, creds) => {
   //declare a client as a new cloudwatch client passing in creds object
   const metricClient = new CloudWatchClient(creds);
 
-  params = {
+  const params = {
     EndTime: new Date(end),
     StartTime: new Date(start),
     MetricDataQueries: []
@@ -103,12 +103,12 @@ utilities.parseData = async (response, funcObj) => {
     //this value represents the key in the funcObj with the value of the function name
     let currFunc = ''
         
-    for (let i = 0; i < el.Id.length; i += 1){
-      if (el.Id[i - 1] === '_'){
-        funcName = el.Id.slice(i);
-        currFunc = funcObj[funcName];
-      }
-    }
+        for (let i = 0; i < el.Id.length; i += 1){
+          if (el.Id[i - 1] === '_'){
+            const funcName = el.Id.slice(i);
+            currFunc = funcObj[funcName];
+          }
+        }
 
     //check if the function name has a key in the cache object
     //if it doesn't exist, we create the key 

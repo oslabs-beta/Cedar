@@ -7,7 +7,15 @@
     "start": "NODE_ENV=production node server/server.js",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack serve --open",
-    "test": "jest"
+    "test": "jest --verbose"
+  },
+  "jest": {
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js",
+    "testEnvironment": "jest-environment-jsdom",
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ]
   },
   "nodemonConfig": {
     "ignore": [
@@ -28,6 +36,7 @@
     "@mui/material": "^5.6.3",
     "@reduxjs/toolkit": "^1.8.1",
     "bcrypt": "^5.0.1",
+    "canvas": "^2.9.1",
     "chart.js": "^3.7.1",
     "chartjs-adapter-moment": "^1.0.0",
     "dotenv": "^16.0.0",
@@ -54,6 +63,7 @@
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
     "nodemon": "^2.0.16",
     "sass": "^1.50.1",
     "sass-loader": "^12.6.0",
