@@ -10,7 +10,7 @@ const server = 'http://localhost:3000';
 // const testJsonFile = path.join(__dirname, '../server/models/getFunctionNames.test.json')
 
 //Route integrationt tests for GET 
-describe('Route integration', () => {
+xdescribe('Route integration', () => {
   describe('/', () => {
       describe('GET', () => {
           it('responds with html type and 200 status', () => {
@@ -63,7 +63,7 @@ describe('Route integration', () => {
 
 
 //Route integration tests for POST
-describe('Route integration', () => {
+xdescribe('Route integration', () => {
     describe('/', () => {
         describe('POST', () => {
             it('responds with html type and 200 status', () => {
