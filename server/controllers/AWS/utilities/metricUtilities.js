@@ -15,7 +15,7 @@ const utilities = {};
 /* ~~~~~~~~~~ * PARAMETER PREP * ~~~~~~~~~~*/
 
 utilities.prepAndSend = (start, end, funcs, metrics) => {
-  params = {
+  const params = {
     EndTime: new Date(end),
     StartTime: new Date(start),
     MetricDataQueries: []
@@ -105,7 +105,7 @@ utilities.sendCommand = async (params, dataArr = [], nextToken = null) => {
         
         for (let i = 0; i < el.Id.length; i += 1){
           if (el.Id[i - 1] === '_'){
-            funcName = el.Id.slice(i);
+            const funcName = el.Id.slice(i);
             currFunc = funcObj[funcName];
           }
         }

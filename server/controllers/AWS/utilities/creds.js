@@ -7,7 +7,7 @@ const creds = {
   credential: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  }
-};
+  }         
+};         
 
-module.exports = creds;
+module.exports = creds;         
