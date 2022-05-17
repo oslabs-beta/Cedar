@@ -67,6 +67,8 @@ const MetricsPage = (props) => {
           setFunctionData={props.setFunctionData}
           setDataLoaded = {setDataLoaded}
           setDisplayProps = {setDisplayProps}
+          creds={props.creds}
+          getCreds={props.getCreds}
         />}
       </FormControl>
       <Box>

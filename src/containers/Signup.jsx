@@ -1,26 +1,42 @@
 import React, {useState} from 'react';
-import { TextField, Grid, Paper, Button, AppBar } from '@mui/material';
+import { TextField, Grid, Paper, Button, AppBar, SvgIcon } from '@mui/material';
 import Lobby from './LobbyPage';
 import Home from './MetricsPage';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
-const Signup = () => {
+const Signup = (props) => {
   const [ create, setCreate ] = useState(false);
   const [ cancel, setCancel ] = useState(false);
 
+  const handleSignupClick = () => {
+    props.setSignup(true)
+  }
+
   const handleCreateChange = () => {
-    setCreate(true);
+    handleSignupClick()
+    setCreate(true)
   }
 
   const handleCancelChange = () => {
     setCancel(true);
   }
-  const paperStyle = {padding: 30, height: '45vh auto', width:300, margin: '10px auto', opacity: 0.75};
+
+  // const handleStackLink = () => {
+  //   //this needs to navigate user to create their stack with Cedar, where they will get arn and region to input
+  // }
+  const handleHelpClick = () => {
+
+  }
+  const paperStyle = {padding: 30, height: '45vh auto', width:500, margin: '10px auto', opacity: 0.75};
   if(create === true){
-    return <Home />
+    return <Lobby />
   }
   if(cancel === true){
     return <Lobby />
   }
+  //link so if no arn, navigate to link, link to quickCreateStack, connects their AWS to our AWS with brief directions to 
+  //no stack, no app
+  //need input field for arn and region
   return(
     <div className='signup'>
     <Grid>
@@ -28,9 +44,36 @@ const Signup = () => {
         <Grid align= 'center'>
           <h3>Sign Up</h3>
         </Grid>
-        <TextField label='Email' placeholder='Enter email' fullwidth="true" />
+        <TextField label='Username' placeholder='Create Username' fullwidth="true" 
+          label="Username"
+          id="createUser"
+          value={props.user}
+          onChange={props.handleUserCreate}
+        />
         <h4></h4>
-        <TextField label='Password' placeholder='Enter password' fullwidth="true" />
+        <TextField label='Password' placeholder='Create Password' fullwidth="true"
+        label="Password"
+        id="createPass"
+        value={props.pass}
+        onChange={props.handlePassCreate}
+        />
+        <h4></h4>
+        <Button variant="outlined" color= 'secondary' target='_blank' href='https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateUrl=https%3A%2F%2Fs3-external-1.amazonaws.com%2Fcf-templates-1gfd64rrlgteb-us-east-1%2F2022133FjG-Cedar-CouldFormation.yml&stackName=Cedar-Stack'>Generate AWS Stack with Cedar</Button>
+        <SvgIcon component={HelpOutlineIcon} color='secondary' onClick={handleHelpClick}/>
+        <h4></h4>
+        <TextField label='ARN' placeholder='Enter ARN' fullwidth="true" 
+        label="ARN"
+        id="createArn"
+        value={props.arn}
+        onChange={props.handleArnCreate}
+        />
+        <h4></h4>
+        <TextField label='Region' placeholder='Enter region' fullwidth="true" 
+        label="Region"
+        id="createRegion"
+        value={props.region}
+        onChange={props.handleRegionCreate}
+        />
         <h4></h4>
         <Button variant="contained" color= 'secondary' onClick= {handleCreateChange} >Create Account</Button>
         <Button variant="text"  color= 'secondary' onClick= {handleCancelChange}>Cancel</Button>

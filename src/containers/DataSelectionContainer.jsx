@@ -64,7 +64,7 @@ const DataSelectionContainer = (props) => {
     // otherwise, the page will try to render a line graph before data is received
     props.setDataLoaded(false);
     const startTime = Math.floor(Date.now() - periods[period[0]].ms);
-    getMetricData(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, metricName, startTime);
+    getMetricData(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, metricName, startTime, props.creds);
     props.setDisplayProps({
       functions: funcName,
       metrics: metricName,

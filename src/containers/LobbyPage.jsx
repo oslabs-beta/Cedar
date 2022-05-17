@@ -5,29 +5,40 @@ import Signup from './Signup';
 import Login from './Login';
 
 const LobbyPage = (props) => {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
   
-  // const paperStyle = {padding: 30, height: '45vh auto', width:300, margin: '10px auto', opacity: 0.75}
-  const [ signUp, setSignup ] = useState(false);
+  // const [ signUp, setSignup ] = useState(false);
   const navigate = useNavigate();
+  
+  // const [username, setUsername] = useState('');
+  // const handleUsernameChange = (event) => {
+  //   const {
+  //     target: {value},
+  //   } = event;
+  //   setUsername(value)
+  // };
 
+  // const [password, setPassword] = useState('');
+  // const handlePasswordChange = (event) => {
+  //   const {
+  //     target: {value},
+  //   } = event;
+  //   setPassword(value)
+  // }
 
   const handleOnLoginClick = useCallback(() => {
-    //props.loggedIn = true;
     props.setLogin(true);
     navigate('/metrics', {replace: true}), [navigate]
   });
-  const handleSignupClick = () => {
-    setSignup(true)
+
+  const handleGoToSignupClick = () => {
+    props.setGoSignup(true)
   }
-  if(signUp === true){
-    return <Signup />
+
+  if(props.goSignup){
+    return <Signup user={props.user} pass={props.pass} setUser={props.setUser} setPass={props.setPass} handleUserCreate={props.handleUserCreate} handlePassCreate={props.handlePassCreate} arn={props.arn} region={props.region} setArn={props.setArn} setRegion={props.setRegion} handleArnCreate={props.handleArnCreate} handleRegionCreate={props.handleRegionCreate} signup={props.signup} setSignup={props.setSignup}/>
   }
     return (
-    <Login handleOnLoginClick={handleOnLoginClick} handleSignupClick={handleSignupClick}/>
+    <Login handleOnLoginClick={handleOnLoginClick} handleUsernameChange={props.handleUsernameChange} handlePasswordChange={props.handlePasswordChange} username={props.username} password={props.password} handleGoToSignupClick={handleGoToSignupClick}/>
     )
 };
 

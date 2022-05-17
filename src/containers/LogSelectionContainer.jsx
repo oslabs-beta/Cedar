@@ -54,7 +54,7 @@ const LogSelectionContainer = (props) => {
   const getLogsNow = () => {
     props.setDataLoaded(false);
     const startTime = Math.floor(Date.now() - PERIODS[period[0]]);
-    getLogs(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, startTime)
+    getLogs(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, startTime, props.creds)
   }
 
   const navigate = useNavigate();

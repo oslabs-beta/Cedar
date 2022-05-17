@@ -24,7 +24,7 @@ const LogsPage = (props) => {
   return(
     <div>
     <Button variant="contained" color= 'secondary' onClick= {handleBackClick} >Return Home</Button>
-    {funcsLoaded && <LogSelectionContainer funcNames={functionNames} funcData={props.funcData} setFunctionData={props.setFunctionData} dataLoaded={dataLoaded} setDataLoaded={setDataLoaded}/>}
+    {funcsLoaded && <LogSelectionContainer funcNames={functionNames} funcData={props.funcData} setFunctionData={props.setFunctionData} dataLoaded={dataLoaded} setDataLoaded={setDataLoaded} creds={props.creds}/>}
     </div>
   )
 }
