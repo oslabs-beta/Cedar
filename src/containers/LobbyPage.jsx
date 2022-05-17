@@ -35,7 +35,7 @@ const LobbyPage = (props) => {
   }
 
   if(props.goSignup){
-    return <Signup user={props.user} pass={props.pass} setUser={props.setUser} setPass={props.setPass} handleUserCreate={props.handleUserCreate} handlePassCreate={props.handlePassCreate} arn={props.arn} region={props.region} setArn={props.setArn} setRegion={props.setRegion} handleArnCreate={props.handleArnCreate} handleRegionCreate={props.handleRegionCreate} signup={props.signup} setSignup={props.setSignup}/>
+    return <Signup user={props.user} pass={props.pass} setUser={props.setUser} setPass={props.setPass} handleUserCreate={props.handleUserCreate} handlePassCreate={props.handlePassCreate} arn={props.arn} region={props.region} setArn={props.setArn} setRegion={props.setRegion} handleArnCreate={props.handleArnCreate} handleRegionCreate={props.handleRegionCreate} signup={props.signup} setSignup={props.setSignup} setGoSignup={props.setGoSignup}/>
   }
     return (
     <Login handleOnLoginClick={handleOnLoginClick} handleUsernameChange={props.handleUsernameChange} handlePasswordChange={props.handlePasswordChange} username={props.username} password={props.password} handleGoToSignupClick={handleGoToSignupClick}/>

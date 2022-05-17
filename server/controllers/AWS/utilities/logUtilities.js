@@ -29,7 +29,7 @@ utilities.sendCommand = async (creds, params, data = [], nextToken = null) => {
 
   //check to see if there is a next token, if not return the data array
   //otherwise recursively call the function passing in the populated data array and token
-  return !response.nextToken ? data.flat() : utilities.sendCommand(params, data, response.nextToken);
+  return !response.nextToken ? data.flat() : utilities.sendCommand(creds, params, data, response.nextToken);
 
 };
 

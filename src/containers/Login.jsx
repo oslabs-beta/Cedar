@@ -12,15 +12,16 @@ const Login = (props) => {
             <h3>Log In</h3>
           </Grid>
           <TextField label='Username' placeholder='Enter username' fullwidth='true' 
-            label="Username"
             id="enterUsername"
             value={props.username}
+            sx={{ m: 1, width: '25ch' }}
             onChange={props.handleUsernameChange}
           />
-          <h4></h4>
           <TextField label='Password' placeholder='Enter password' fullwidth='true' 
-          label="Password"
           id="enterPassword"
+          type="password"
+          autoComplete="current-password"
+          sx={{ m: 1, width: '25ch' }}
           value={props.password}
           onChange={props.handlePasswordChange}
           />

@@ -18,6 +18,7 @@ const Signup = (props) => {
   }
 
   const handleCancelChange = () => {
+    props.setGoSignup(false);
     setCancel(true);
   }
 
@@ -51,6 +52,8 @@ const Signup = (props) => {
         />
         <h4></h4>
         <TextField label='Password' placeholder='Create Password' fullwidth="true"
+        type="password"
+        autoComplete="current-password"
         id="createPass"
         value={props.pass}
         onChange={props.handlePassCreate}

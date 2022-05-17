@@ -33,7 +33,6 @@ const LogsPage = (props) => {
   
   return(
     <div>
-    <Button variant="contained" color= 'secondary' onClick= {handleBackClick} >Return Home</Button>
     {/* <Button variant="contained" color= 'secondary' onClick= {handleBackClick} >Return Home</Button> */}
     <Box m={1} sx={{ flexGrow: 1 }} >
         <AppBar position="static" >

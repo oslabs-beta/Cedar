@@ -50,11 +50,12 @@ const LogSelectionContainer = (props) => {
     setPeriod(typeof value === 'string' ? value.split(',') : value);
   }
   //const [clicked, setClicked] = useState(false);
+  const [displayedFunc, setDisplayedFunc] = useState('');
 
   const getLogsNow = () => {
     props.setDataLoaded(false);
     const startTime = Math.floor(Date.now() - PERIODS[period[0]]);
-    getLogs(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, startTime, props.creds)
+    getLogs(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, setDisplayedFunc, startTime, props.creds)
   }
 
   const navigate = useNavigate();
@@ -103,7 +104,7 @@ const LogSelectionContainer = (props) => {
         <Button variant="contained" color= 'secondary' onClick= {getLogsNow}>Go</Button>
         </Box>
       </FormControl>
-      {props.dataLoaded && <Messages logs={props.funcData[funcName].logs}/>}
+      {props.dataLoaded && <Messages logs={props.funcData[displayedFunc].logs}/>}
       </Box>
       </div>
   )

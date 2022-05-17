@@ -108,7 +108,8 @@ export const getMetricData = async (currFunctionData, setFunctionData, setDataLo
         start: startTime,
         end: endTime,
         funcs: functions,
-        metrics
+        metrics,
+        creds
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -145,7 +146,7 @@ export const getMetricData = async (currFunctionData, setFunctionData, setDataLo
  * @param {object} creds - credentials object held in state with users region and access keys
  * @param {number} endTime @optional - end time until which to request log data in Unix time (ms)
  */
-export const getLogs = async (currFunctionData, setFunctionData, setDataLoaded, func, startTime, creds, endTime) => {
+export const getLogs = async (currFunctionData, setFunctionData, setDataLoaded, func, setDisplayedFunc, startTime, creds, endTime) => {
   if (!endTime) endTime = Math.floor(Date.now() / (1000*60))*(1000*60);
   try {
     const logs = await fetch('/api/aws/getLogsData', {
@@ -155,6 +156,7 @@ export const getLogs = async (currFunctionData, setFunctionData, setDataLoaded, 
         start: startTime,
         end: endTime,
         func,
+        creds
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -166,6 +168,7 @@ export const getLogs = async (currFunctionData, setFunctionData, setDataLoaded, 
     }
     newFunctionData[func].logs = parsedLogs;
     setFunctionData(newFunctionData);
+    setDisplayedFunc(func);
     setDataLoaded(true);
   } catch (err) {
     console.log(err);
