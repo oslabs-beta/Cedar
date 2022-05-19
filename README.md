@@ -14,11 +14,24 @@ Cedar was built as a free, open-source Lambda function visualization tool that d
 
 ### Desmistify your AWS Lambda function metrics and logs w/ Cedar!
 <img width="1433" alt="Screen Shot 2022-05-18 at 9 15 22 PM" src="https://user-images.githubusercontent.com/100087175/169338260-5d950a5f-7eb4-4445-a44a-fb917019d535.png">
-To visualize your AWS Lambda functions and metrics at a glance, head over to Cedar's website (http://cedarmonitoring.com/) and make an account. 
+To visualize your AWS Lambda functions and metrics at a glance, head over to Cedar's website (http://cedarmonitoring.com/) and make an account:
+
+* Create a username and password then click the “generate AWS stack with Cedar” button
+* You will be redirected to your AWS IAM page. Log in; you will be prompted to create a Cedar-Stack
+* Navigate to the ‘Outputs’ tab; copy the Cedar-Stack ARN
+* Paste it in the ARN box of the Cedar sign-up page along with your region
+* Click 'Create account'
+
+
 <img width="1431" alt="Screen Shot 2022-05-19 at 10 47 13 AM" src="https://user-images.githubusercontent.com/100087175/169337336-c8699f46-3b49-4b34-9ff9-ebfd6480ac3c.png">
+
 You will be redirected to a metrics page where you can choose your functions, metrics and time period. Hit the 'Go' button and your function metrics will be displayed on easy-to-read graphs
+
+
 <img width="1420" alt="Screen Shot 2022-05-19 at 10 54 45 AM" src="https://user-images.githubusercontent.com/100087175/169337537-80f56b4e-5322-455d-ba0c-b55e9ca0ef7f.png">
+
 If you want to check out your logs, hit the 'Logs' button on the top left of the 'Metrics' page. Pick your function and time period; a chart will be rendered with the 'start', 'end', 'report', and 'error' events for a particular function's logs. If you want to get more specific, you have options with the 'Filter by' and 'Sort by' drop-downs. 
+
 
 ### Tech Stack
 
