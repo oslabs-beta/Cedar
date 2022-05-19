@@ -50,11 +50,12 @@ const LogSelectionContainer = (props) => {
     setPeriod(typeof value === 'string' ? value.split(',') : value);
   }
   //const [clicked, setClicked] = useState(false);
+  const [displayedFunc, setDisplayedFunc] = useState('');
 
   const getLogsNow = () => {
     props.setDataLoaded(false);
     const startTime = Math.floor(Date.now() - PERIODS[period[0]]);
-    getLogs(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, startTime)
+    getLogs(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, setDisplayedFunc, startTime, props.creds)
   }
 
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ const LogSelectionContainer = (props) => {
   return (
     <div className='logSelection' >
       <Box pt={2} >
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 300, opacity: 0.85 }}>
         <InputLabel id="demo-simple-select-label">Function</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -80,8 +81,8 @@ const LogSelectionContainer = (props) => {
           ))}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-simple-select-label">Period</InputLabel>
+      <FormControl sx={{ m: 1, width: 300, opacity: 0.85}}>
+        <InputLabel color= 'primary'  id="demo-simple-select-label">Period</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -100,10 +101,10 @@ const LogSelectionContainer = (props) => {
       </FormControl>
       <FormControl >
         <Box p={1} pt={2}>
-        <Button variant="contained" color= 'secondary' onClick= {getLogsNow}>Go</Button>
+        <Button variant="contained" sx={{ opacity: 0.85}} onClick= {getLogsNow}>Go</Button>
         </Box>
       </FormControl>
-      {props.dataLoaded && <Messages logs={props.funcData[funcName].logs}/>}
+      {props.dataLoaded && <Messages logs={props.funcData[displayedFunc].logs}/>}
       </Box>
       </div>
   )

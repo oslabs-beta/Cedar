@@ -30,17 +30,11 @@ const FilterSelection = (props) => {
     array= typeError;
   }
   
-  //props.readLogsResult
-  // const createTableByInvocation = (invocationTime, start, end, report, error) => {
-  //   return { invocationTime, start, end, report, error }
-  // }
-  // const rowsByInvocation = [];
-  //this needs to be an array of objects, each with properties invocationTime, start, end, report, error
 
   return (
     <div>
       { props.type!== '' &&
-      <TableContainer component={Paper}>
+      <TableContainer sx={{ width: 1500, opacity: 0.85 }}component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>

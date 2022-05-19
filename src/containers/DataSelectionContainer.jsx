@@ -64,7 +64,7 @@ const DataSelectionContainer = (props) => {
     // otherwise, the page will try to render a line graph before data is received
     props.setDataLoaded(false);
     const startTime = Math.floor(Date.now() - periods[period[0]].ms);
-    getMetricData(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, metricName, startTime);
+    getMetricData(props.funcData, props.setFunctionData, props.setDataLoaded, funcName, metricName, startTime, props.creds);
     props.setDisplayProps({
       functions: funcName,
       metrics: metricName,
@@ -76,7 +76,7 @@ const DataSelectionContainer = (props) => {
   return (
     <div className= 'dataSelection'>
       <Box pt={3} pb={3}>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 300, opacity: 0.85 }}>
         <InputLabel id="demo-multiple-checkbox-label">Function(s)</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
@@ -96,7 +96,7 @@ const DataSelectionContainer = (props) => {
           ))}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 300, opacity: 0.85 }}>
         <InputLabel id="demo-multiple-checkbox-label">Metric(s)</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
@@ -116,7 +116,7 @@ const DataSelectionContainer = (props) => {
           ))}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 300, opacity: 0.85 }}>
         <InputLabel id="demo-simple-select-label">Period</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -135,7 +135,9 @@ const DataSelectionContainer = (props) => {
         </Select>
       </FormControl>
       <FormControl>
-        <Button variant="contained" color= 'secondary' onClick={getMetrics} >Go</Button>
+        <Box p={1} pt={2}>
+        <Button variant="contained" sx={{ opacity: 0.85}} onClick={getMetrics} >Go</Button>
+        </Box>
       </FormControl>
       </Box>
     </div>

@@ -7,7 +7,7 @@ const logController = {};
 logController.getLogs = async (req, res, next) => {
   try {
     //grab start, end, and functions from req.body
-    const { start, end, func } = req.body;
+    const { start, end, func, creds } = req.body;
 
     //declare parameters to be passed into the send command
     const params = { 
@@ -18,7 +18,7 @@ logController.getLogs = async (req, res, next) => {
 
     //attatch the response from the sendCommand function to res.locals
     //sendCommand is located in the utilities directory in the logUtilities file
-    res.locals.logs = await utilities.sendCommand(params);
+    res.locals.logs = await utilities.sendCommand(creds, params);
     console.log('~~~SUCCESS~~~')
     return next();
   } catch (err){

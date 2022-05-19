@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Typography} from '@mui/material';
 import { useNavigate } from 'react-router';
 import DataSelectionContainer from './DataSelectionContainer';
 import LineGraphContainer from './LineGraphContainer';
+import { postLogout } from '../utils/userUtils';
 
 /**
  * MetricPage component. 
@@ -57,14 +58,18 @@ const MetricsPage = (props) => {
   
   const navigate = useNavigate();
   const handleLogClick = useCallback(() => navigate('/logs', {replace: true}), [navigate]);
-  const handleLogout = useCallback(() => navigate('/', {replace: true}), [navigate]);
+  
+  const handleLogout = useCallback(() => {
+    postLogout(props.setLogin, props.username, props.setUsername)
+    navigate('/', {replace: true}), [navigate]
+  });
   return(
     <div className= "homePage">
-        <Box >
+        <Box sx={{ flexGrow: 1, opacity: 0.75 }}>
         <AppBar position="static">
           <Toolbar>
           <Button sx={{ m: 1, width: 80 }} variant="outlined" color= 'secondary' onClick= {handleLogClick} >LOGS</Button>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography color= 'secondary' variant="h5" component="div" sx={{ flexGrow: 1, ml: 16 }}>
               METRICS
             </Typography>
             <Button color="inherit" onClick={handleLogout}>Logout</Button>
@@ -79,6 +84,8 @@ const MetricsPage = (props) => {
           setFunctionData={props.setFunctionData}
           setDataLoaded = {setDataLoaded}
           setDisplayProps = {setDisplayProps}
+          creds={props.creds}
+          getCreds={props.getCreds}
         />}
       </FormControl>
       <Box>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, InputLabel, MenuItem, FormControl, Select, Button } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, InputLabel, MenuItem, FormControl, Select, Button, Box } from '@mui/material';
 import { dateTime } from '../utils/conversions';
 import FilterSelection from './FilterSelection';
 import { readLog } from '../utils/logsUtils';
@@ -53,8 +53,8 @@ const Messages = (props) => {
   }
 
     return(
-     <div>
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+     <div className="messages">
+        <FormControl sx={{ m: 1, minWidth: 120, opacity: 0.85 }}>
           <InputLabel id="demo-simple-select-standard-label">Filter By</InputLabel>
           <Select
             labelId="demo-simple-select-standard-label"
@@ -71,7 +71,7 @@ const Messages = (props) => {
         </FormControl>
 
 
-         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+         <FormControl sx={{ m: 1, minWidth: 120, opacity: 0.85  }}>
         <InputLabel id="demo-simple-select-standard-label">Sort By</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
@@ -90,7 +90,7 @@ const Messages = (props) => {
 
         {/* this will conditionally render if the filter selection is 'log type' */}
         { filter === 'logType' && 
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <FormControl sx={{ m: 1, height: 30, minWidth: 150, opacity: 0.85 }}>
         <InputLabel id="demo-simple-select-standard-label">Choose Type</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
@@ -103,17 +103,20 @@ const Messages = (props) => {
           <MenuItem value={'end'}>End</MenuItem>
           <MenuItem value={'report'}>Report</MenuItem>
           <MenuItem value={'error'}>Error</MenuItem>
-          <MenuItem value={'viewAll'}>View All</MenuItem>
+          {/* <MenuItem value={'viewAll'}>View All</MenuItem> */}
         </Select>
       </FormControl>
         }
-
+      <FormControl>
+      <Box p={1} pt={2}>
       <Button variant="contained" sx={{ m: .25, minWidth: 40 }} onClick={handleEnterClick}>ENTER</Button>
+      </Box>
+      </FormControl>
         {/* this is the end of the drop down selections */}
         {/* this is the start of the table */}
       {!clicked ? 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer sx={{ width: 1500, opacity: 0.90}} pt={2} component={Paper}>
+        <Table sx={{ minWidth: 650, opacity: 0.85}} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Date</TableCell>

@@ -5,21 +5,20 @@ const {
   ListFunctionsCommand 
 } = require('@aws-sdk/client-lambda');
 
-const creds = require('./creds.js');
-
-// initiate a client as a new lambda client with credentials object
-const lambdaClient = new LambdaClient(creds);
-
 const utilities = {};
 
 /* ~~~~~~~~ * SEND COMMAND FUNCTION * ~~~~~~~~ */
 
 
-utilities.sendCommand = async(params, funcArr = [], nextToken = null) => {
+utilities.sendCommand = async(params, creds,  funcArr = [], nextToken = null) => {
 
   //if a next token is provided, add it to the param obj
   if (nextToken) params.nextMarker = nextToken;
       
+  // initiate a client as a new lambda client with credentials object
+  console.log(creds)
+  const lambdaClient = new LambdaClient(creds);
+
   // initiate a command (object instance) with required input parameters
   const command = new ListFunctionsCommand(params);
 
