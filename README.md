@@ -12,11 +12,13 @@ With AWS’ many services and hefty docs, however, navigating the AWS console ca
 
 Cedar was built as a free, open-source Lambda function visualization tool that developers can securely connect their AWS accounts to and use to monitor key metrics and logs data at a glance.
 
-### Getting Started/Installation and Setup
-
-### Lambda Metrics
-
-—screenshots or GIFs of what to expect once logged in
+### Desmistify your AWS Lambda function metrics and logs w/ Cedar!
+<img width="1433" alt="Screen Shot 2022-05-18 at 9 15 22 PM" src="https://user-images.githubusercontent.com/100087175/169338260-5d950a5f-7eb4-4445-a44a-fb917019d535.png">
+To visualize your AWS Lambda functions and metrics at a glance, head over to Cedar's website (http://cedarmonitoring.com/) and make an account. 
+<img width="1431" alt="Screen Shot 2022-05-19 at 10 47 13 AM" src="https://user-images.githubusercontent.com/100087175/169337336-c8699f46-3b49-4b34-9ff9-ebfd6480ac3c.png">
+You will be redirected to a metrics page where you can choose your functions, metrics and time period. Hit the 'Go' button and your function metrics will be displayed on easy-to-read graphs
+<img width="1420" alt="Screen Shot 2022-05-19 at 10 54 45 AM" src="https://user-images.githubusercontent.com/100087175/169337537-80f56b4e-5322-455d-ba0c-b55e9ca0ef7f.png">
+If you want to check out your logs, hit the 'Logs' button on the top left of the 'Metrics' page. Pick your function and time period; a chart will be rendered with the 'start', 'end', 'report', and 'error' events for a particular function's logs. If you want to get more specific, you have options with the 'Filter by' and 'Sort by' drop-downs. 
 
 ### Tech Stack
 
@@ -70,10 +72,10 @@ Distributed under MIT License
 
 ### Contributors
 
-Larissa Ciancarelli | [https://github.com/larissa-ciancarelli](https://github.com/larissa-ciancarelli) | [https://www.linkedin.com/in/larissa-ciancarelli/](https://www.linkedin.com/in/larissa-ciancarelli/)
+Larissa Ciancarelli | [Github](https://github.com/larissa-ciancarelli) | [LinkedIn](https://www.linkedin.com/in/larissa-ciancarelli/)
 
-Mireille Crocco |[https://github.com/Mireille13](https://github.com/Mireille13)  | [https://www.linkedin.com/in/mireille-crocco-ba065816b/](https://www.linkedin.com/in/mireille-crocco-ba065816b/)
+Mireille Crocco | [Github](https://github.com/Mireille13) | [LinkedIn](https://www.linkedin.com/in/mireille-crocco-ba065816b/)
 
-Jonah Eidman | [https://github.com/jonaheidman](https://github.com/jonaheidman) | [https://www.linkedin.com/in/jonah-eidman-11612aa9/](https://www.linkedin.com/in/jonah-eidman-11612aa9/)
+Jonah Eidman | [Github](https://github.com/jonaheidman) | [LinkedIn](https://www.linkedin.com/in/jonah-eidman-11612aa9/)
 
-Carly Yarnell |   [https://github.com/carlyyarnell](https://github.com/carlyyarnell) | [https://www.linkedin.com/in/carly-yarnell-132301192/](https://www.linkedin.com/in/carly-yarnell-132301192/)
+Carly Yarnell | [Github](https://github.com/carlyyarnell) | [LinkedIn](https://www.linkedin.com/in/carly-yarnell-132301192/)
