@@ -1,6 +1,11 @@
-// body {
-//   display: flex;
-// }
+body {
+  // background-image: url('/darkforest.jpg');
+  background-size: cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/darkforest.jpg');
+  // background-blend-mode: darken;
+  // background: rgba(0, 0, 0, 0.7) url('/darkforest.jpg');
+  // color: white;
+}
 .lobbyPage {
   display: flex;
   flex-direction: column;
@@ -16,7 +21,7 @@
 }
 .signup {
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   justify-content: center;
   align-items: center;
   background-image: url('../images/WallpaperDog-10879441.jpg');
@@ -29,13 +34,14 @@
 }
 
 .homePage{
-  background-color: rgb(2, 52, 48);
+  //background-color: white;
   display: flex;
   flex-direction: column;
+  color: white
 }
 
 .app2 {
-  background-color: white;
+  background-color: rgb(2, 52, 48);
 }
 
 #graphsContainer {
@@ -51,18 +57,56 @@
     margin: 10px 10px;
     .lineGraph{
       padding: 5vh;
-      background-color: rgb(17, 97, 73);
+      // background-color: rgb(17, 97, 73);
+      background-color: #0f3915;
       border-radius: 20px;
     }
   }
 }
 
+// .logPage {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// }
 .logSelection {
-  // display: flex;
-  padding-left: 1cm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // padding-left: 1cm;
 }
+// .messages {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   // justify-content: center;
+// }
 
 .dataSelection {
   display: flex;
+  align-items: center;
+  justify-content: center;
   padding-left: 1cm;
+}
+
+#alert {
+  color: red;
+}
+
+#demo-simple-select {
+  background-color: white;
+}
+#demo-simple-select-standard {
+  color: black;
+  background-color: white;
+}
+
+#demo-multiple-checkbox {
+  color: black;
+  background-color: white;
+}
+
+#infoBox {
+  font-size: 8;
 }

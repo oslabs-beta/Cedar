@@ -5,12 +5,15 @@ const {
   AssumeRoleCommand 
 } = require("@aws-sdk/client-sts");
 
+const creds = require('./creds.js')
+
 const utilities = {};
 
 /* ~~~~~~~~~~ * PREP AND SEND COMMAND * ~~~~~~~~~~ */
 
-utilities.prepAndSend = async (arn, region) => {
+utilities.prepAndSend = async (arn, externalId) => {
 
+<<<<<<< HEAD
   console.log('here is region', region)
   console.log('here is arn', arn)
   
@@ -20,13 +23,20 @@ utilities.prepAndSend = async (arn, region) => {
   //declare a client as a new STS client passing in creds
   const stsClient = new STSClient(creds);
 
+=======
+  //declare a client as a new STS client passing in creds
+  const stsClient = new STSClient(creds);
+  console.log(stsClient)
+>>>>>>> dev
   //declare params to pass into the assume role command
   //these will be a string indicating the session name 
   //and the arn generated from the user creating the cedar stack
   const params = {
     RoleSessionName: 'Cedar_Session',
-    RoleArn: arn
+    RoleArn: arn,
+    ExternalId: externalId
   }
+
   console.log('params', params)
   const command = new AssumeRoleCommand(params)
 

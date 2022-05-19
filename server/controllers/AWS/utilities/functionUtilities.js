@@ -16,6 +16,7 @@ utilities.sendCommand = async(params, creds,  funcArr = [], nextToken = null) =>
   if (nextToken) params.nextMarker = nextToken;
       
   // initiate a client as a new lambda client with credentials object
+  console.log(creds)
   const lambdaClient = new LambdaClient(creds);
 
   // initiate a command (object instance) with required input parameters
