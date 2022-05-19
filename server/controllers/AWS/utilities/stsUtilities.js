@@ -13,21 +13,9 @@ const utilities = {};
 
 utilities.prepAndSend = async (arn, externalId) => {
 
-<<<<<<< HEAD
-  console.log('here is region', region)
-  console.log('here is arn', arn)
-  
-  const creds = {
-    region: region,
-  }
-  //declare a client as a new STS client passing in creds
-  const stsClient = new STSClient(creds);
-
-=======
   //declare a client as a new STS client passing in creds
   const stsClient = new STSClient(creds);
   console.log(stsClient)
->>>>>>> dev
   //declare params to pass into the assume role command
   //these will be a string indicating the session name 
   //and the arn generated from the user creating the cedar stack
