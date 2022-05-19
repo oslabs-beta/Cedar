@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router';
 import { Button, SvgIcon } from '@mui/material';
 import { AppBar, Toolbar, Typography, Box, FormControl} from '@mui/material';
 import LogSelectionContainer from './LogSelectionContainer';
+import { postLogout } from '../utils/userUtils';
+
 
 const LogsPage = (props) => {
   //this allows for navigation back to home route when the 'back' button is clicked
@@ -21,7 +23,11 @@ const LogsPage = (props) => {
   
   const navigate = useNavigate();
   const handleBackClick = useCallback(() => navigate('/metrics', {replace: true}), [navigate]);
-  const handleLogout = useCallback(() => navigate('/', {replace: true}), [navigate]);
+  
+  const handleLogout = useCallback(() => {
+    postLogout(props.setLogin)
+    navigate('/', {replace: true}), [navigate]
+  });
   
   const HomeIcon = (props) => {
     return (
@@ -32,13 +38,13 @@ const LogsPage = (props) => {
   }
   
   return(
-    <div>
+    <div className='logPage'>
     {/* <Button variant="contained" color= 'secondary' onClick= {handleBackClick} >Return Home</Button> */}
-    <Box m={1} sx={{ flexGrow: 1 }} >
+    <Box sx={{ flexGrow: 1, opacity: 0.75 }} >
         <AppBar position="static" >
           <Toolbar>
-          <HomeIcon style={{ marginRight: 16 }} color="secondary" fontSize="large" onClick= {handleBackClick}/>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <HomeIcon style={{ marginRight: 20 }} color="secondary" fontSize="large" onClick= {handleBackClick}/>
+            <Typography variant="h5" color='secondary' component="div" sx={{ flexGrow: 1, ml: 16 }}>
               LOGS
             </Typography>
             <Button color="inherit" onClick={handleLogout}>Logout</Button>

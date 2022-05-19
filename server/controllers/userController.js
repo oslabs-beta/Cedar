@@ -4,6 +4,7 @@ const SALT_WORK_FACTOR = 10;
 
 //require in db from dbModel
 const User = require('../models/dbModel.js');
+const Session = require('../models/sessionModel.js')
 
 //controller to login and signup
 const userController = {};
@@ -15,7 +16,7 @@ userController.signUp = async (req, res, next) => {
   try{ 
     //make query to db
     await User.create({username, password, arn, region});
-    console.log('yay you signed up woopdie do!')
+    console.log('signup successful')
     return next();
   } catch (err) {
     return next({
@@ -28,9 +29,9 @@ userController.signUp = async (req, res, next) => {
 //login controller
 userController.login = async (req, res, next) => {
   const { username, password } = req.body;
-  console.log('here is username', username);
-  console.log('here is password', password);
+  console.log('req body', req.body)
   try{
+    await Session.deleteOne({ cookieId: "62858f194165138887380e06" })
     //save awaited db response to variable to use with bcrypt compare
     const data = await User.findOne({username});
     //not sure if this is right but trying to figure out how to know if the user doesnt exist

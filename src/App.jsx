@@ -8,7 +8,8 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { getFuncs, postSignup } from "./utils/fetchUtils";
+import { getFuncs} from "./utils/fetchUtils";
+import { postSignup } from './utils/userUtils'
 
 
 
@@ -20,7 +21,7 @@ const themeLight = createTheme({
       main: '#3f51b5',
     },
     secondary: {
-      main: '#200d83',
+      main: '#9ccc65',
     },
     info: {
       main: '#2196f3',
@@ -33,10 +34,10 @@ const themeDark = createTheme({
     type: 'dark',
     // mode: 'dark',
     primary: {
-      main: '#57bfd8',
+      main: '#8bc34a',
     },
     secondary: {
-      main: '#200d83',
+      main: '#124116',
     },
     info: {
       main: '#2196f3',
@@ -119,8 +120,9 @@ const App = () => {
    */
   const [login, setLogin] = useState(false);
   const [signup, setSignup] = useState(false);
+  // const [verified, setVerified] = useState(false);
   const [goSignup, setGoSignup] = useState(false);
-  const [theme, setTheme] = useState(themeLight);
+  // const [theme, setTheme] = useState(themeLight);
 
   const [functionData, setFunctionData] = useState({});
   // 
@@ -133,7 +135,7 @@ const App = () => {
     const sessionFunctionData = JSON.parse(window.sessionStorage.getItem('FUNCTION_DATA'));
     if (sessionFunctionData !== null) setFunctionData(sessionFunctionData);
   }, [])
-  
+
   useEffect(() => {
     window.sessionStorage.setItem('LOGIN', JSON.stringify(login));
     if(login){
@@ -175,9 +177,61 @@ const App = () => {
         </AppBar> */}
         {/* <Lobby /> */}
         <Routes>
-          <Route path="/" element={<LobbyPage loggedIn={login} setLogin={setLogin} signup={signup} setSignup={setSignup} username={username} setUsername={setUsername} password={password} setPassword={setPassword} handleUsernameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} user={user} setUser={setUser} pass={pass} setPass={setPass} handleUserCreate={handleUserCreate} handlePassCreate={handlePassCreate} arn={arn} region={region} setArn={setArn} setRegion={setRegion} handleArnCreate={handleArnCreate} handleRegionCreate={handleRegionCreate} goSignup={goSignup} setGoSignup={setGoSignup}/>} />
-          <Route path="/metrics" element={<MetricsPage funcData={functionData} setFunctionData={setFunctionData} creds={creds} setCreds={setCreds}/>} />
-          <Route path="/logs" element={<LogsPage funcData={functionData} setFunctionData={setFunctionData} creds={creds} setCreds={setCreds}/>} />
+          <Route path="/" 
+          element=
+          {<LobbyPage 
+          loggedIn={login} 
+          setLogin={setLogin} 
+          signup={signup} 
+          setSignup={setSignup} 
+          username={username} 
+          setUsername={setUsername} 
+          password={password} 
+          setPassword={setPassword} 
+          handleUsernameChange={handleUsernameChange} 
+          handlePasswordChange={handlePasswordChange} 
+          user={user} 
+          setUser={setUser} 
+          pass={pass} 
+          setPass={setPass} 
+          handleUserCreate={handleUserCreate} 
+          handlePassCreate={handlePassCreate} 
+          arn={arn} 
+          region={region} 
+          setArn={setArn} 
+          setRegion={setRegion} 
+          handleArnCreate={handleArnCreate} 
+          handleRegionCreate={handleRegionCreate} 
+          goSignup={goSignup} 
+          setGoSignup={setGoSignup}
+          // verified={verified}
+          // setVerified={setVerified}
+          />} 
+          />
+          <Route path="/metrics" 
+          element=
+          {<MetricsPage 
+          funcData={functionData} 
+          setFunctionData={setFunctionData} 
+          creds={creds} 
+          setCreds={setCreds}
+          // username={username}
+          // setUsername={setUsername}
+          setLogin={setLogin}
+          />} 
+          />
+          <Route path="/logs" 
+          element=
+          {<LogsPage 
+          funcData={functionData} 
+          setFunctionData={setFunctionData} 
+          creds={creds} 
+          setCreds={setCreds}
+          // username={username}
+          // setUsername={setUsername}
+          setLogin={setLogin}
+          />} 
+          />
         </Routes>
       </ThemeProvider>
     </>
