@@ -15,10 +15,10 @@ utilities.prepAndSend = async (arn, region) => {
   console.log('here is arn', arn)
   
   const creds = {
-    region: 'us-east-1',
+    region: region,
   }
   //declare a client as a new STS client passing in creds
-  const stsClient = new STSClient(region);
+  const stsClient = new STSClient(creds);
 
   //declare params to pass into the assume role command
   //these will be a string indicating the session name 
