@@ -11,14 +11,8 @@ const utilities = {};
 
 /* ~~~~~~~~~~ * PREP AND SEND COMMAND * ~~~~~~~~~~ */
 
-utilities.prepAndSend = async (arn, region) => {
+utilities.prepAndSend = async (arn, externalId) => {
 
-  console.log('here is region', region)
-  console.log('here is arn', arn)
-  
-  // const creds = {
-  //   region: region
-  // }
   //declare a client as a new STS client passing in creds
   const stsClient = new STSClient(creds);
   console.log(stsClient)
@@ -27,8 +21,10 @@ utilities.prepAndSend = async (arn, region) => {
   //and the arn generated from the user creating the cedar stack
   const params = {
     RoleSessionName: 'Cedar_Session',
-    RoleArn: arn
+    RoleArn: arn,
+    ExternalId: externalId
   }
+
   console.log('params', params)
   const command = new AssumeRoleCommand(params)
 

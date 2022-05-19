@@ -64,7 +64,7 @@ const Signup = (props) => {
         sx={{ m: 2, width: '25ch' }}
         onChange={props.handlePassCreate}
         />
-        <Button sx={{ m: 1}} variant="outlined" color= 'secondary' target='_blank' href='https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateUrl=https%3A%2F%2Fs3-external-1.amazonaws.com%2Fcf-templates-1gfd64rrlgteb-us-east-1%2F2022133FjG-Cedar-CouldFormation.yml&stackName=Cedar-Stack'>Generate AWS Stack with Cedar</Button>
+        <Button sx={{ m: 1}} variant="outlined" color= 'secondary' target='_blank' href={`https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=Cedar-Stack&param_ExternalId=${props.EXTERNAL_ID}&templateURL=https://cf-templates-13wv616l871or-us-east-1.s3.amazonaws.com/202213922x-CedarDelegation.yaml`} > Generate AWS Stack with Cedar</Button>
         <SvgIcon component={HelpOutlineIcon} color='secondary' onClick={handleHelpClick}/>
         {/* <Button sx={{ width: '1ch'}} onClick={handleHelpClick} >?</Button> */}
         <TextField label='ARN' placeholder='Enter ARN' fullwidth="true" 

@@ -9,10 +9,10 @@ const router = express.Router();
 
 router.post('/login', 
   userController.login, 
-  cookieController.setCookie,
-  sessionController.startSession,
   stsController.getCreds, 
   functionController.getFuncs, 
+  // cookieController.setCookie,
+  // sessionController.startSession,
   (req, res) => {
     res.status(200).json(res.locals.data);
 });

@@ -51,7 +51,6 @@ utilities.prepAndSend = (start, end, funcs, metrics, creds) => {
     }
   }
   //call the sendCommand function passing in the prepped parameters
-  console.log('before call', metricClient)
   return utilities.sendCommand(metricClient, params);
 }
 
@@ -61,7 +60,6 @@ utilities.sendCommand = async (metricClient, params, dataArr = [], nextToken = n
   //if nextToken is not null, add it to params
   if (nextToken) params.NextToken = nextToken;
 
-  console.log('after call', metricClient)
   //declare command variable to be a new get metric data command passing in params 
   const metricCommand = new GetMetricDataCommand(params);
 

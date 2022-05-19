@@ -12,10 +12,11 @@ const userController = {};
 //signup controller
 userController.signUp = async (req, res, next) => {
   //username and password will be coming in on request body
-  const { username, password, arn, region } = req.body;
+  const { username, password, arn, region, externalId } = req.body;
   try{ 
     //make query to db
-    await User.create({username, password, arn, region});
+    console.log(externalId);
+    await User.create({username, password, arn, region, externalId});
     console.log('signup successful')
     return next();
   } catch (err) {
@@ -31,7 +32,7 @@ userController.login = async (req, res, next) => {
   const { username, password } = req.body;
   console.log('req body', req.body)
   try{
-    await Session.deleteOne({ cookieId: "62858f194165138887380e06" })
+    // await Session.deleteOne({ cookieId: "6285b79cebef86124e0d40ba" })
     //save awaited db response to variable to use with bcrypt compare
     const data = await User.findOne({username});
     //not sure if this is right but trying to figure out how to know if the user doesnt exist
@@ -42,8 +43,8 @@ userController.login = async (req, res, next) => {
     const verified = await bcrypt.compare(password, data.password);
     //if verified returns false throw and error
     if (!verified) throw new Error ('username or password is incorrect');
-    const { arn, region } = data
-    res.locals.info = {arn, region};
+    const { arn, region, externalId } = data
+    res.locals.info = {arn, region, externalId};
     return next();
   } catch (err) {
     return next({

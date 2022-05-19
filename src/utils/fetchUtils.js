@@ -50,8 +50,8 @@ export const getFuncs = async (setFunctionData, setCreds, username, password) =>
       })
       setFunctionData(functionData);
       const credData = {};
-      credData[region] = parsedData.creds.region;
-      credData[credential] = parsedData.creds.credential;
+      credData.region = parsedData.creds.region;
+      credData.credentials = parsedData.creds.credentials;
       setCreds(credData); 
     // }
   } catch (err) {

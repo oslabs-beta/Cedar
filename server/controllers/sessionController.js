@@ -20,19 +20,19 @@ sessionController.startSession = async (req, res, next) => {
 }
 
 sessionController.logOut = async (req, res, next) => {
-
-  try {
-    console.log('req.cookies', req.cookies)
-    await Session.deleteOne({ cookieId: req.cookies.ssid })
-    // res.clearCookie('ssid')
-    console.log('logout successful')
-    return next();
-  } catch (err) {
-    return next({
-      log: `error caught in sessionController.logOut: ${err}`,
-      message: {err: 'an error occurred while attempting to log out a user'}
-    })
-  }
+  return next();
+  // const { ssid } = req.cookies
+  // try {
+  //   await Session.deleteOne({ cookieId: ssid })
+  //   res.clearCookie('ssid')
+  //   console.log('logout successful')
+  //   return next();
+  // } catch (err) {
+  //   return next({
+  //     log: `error caught in sessionController.logOut: ${err}`,
+  //     message: {err: 'an error occurred while attempting to log out a user'}
+  //   })
+  // }
 }
 
 

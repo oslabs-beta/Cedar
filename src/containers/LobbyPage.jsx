@@ -1,9 +1,7 @@
 import React, {useCallback, useState} from 'react';
-import { useNavigate } from "react-router-dom";
-// import { TextField, Grid, Paper, Button, AppBar } from '@mui/material';
+import { useNavigate } from "react-router-dom";;
 import Signup from './Signup';
 import Login from './Login';
-// import { StoreMallDirectoryRounded } from '@mui/icons-material';
 
 const LobbyPage = (props) => {
   // const [retry, setRetry] = useState(false)
@@ -40,6 +38,7 @@ const LobbyPage = (props) => {
     handleRegionCreate={props.handleRegionCreate} 
     signup={props.signup} setSignup={props.setSignup} 
     setGoSignup={props.setGoSignup}
+    EXTERNAL_ID={props.EXTERNAL_ID}
     />
   }
     return (

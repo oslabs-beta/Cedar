@@ -4,64 +4,17 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import LobbyPage from './containers/LobbyPage';
 import MetricsPage from './containers/MetricsPage';
 import LogsPage from './containers/LogsPage';
+import { themeLight, themeDark} from './utils/userUtils'
 import {
   Routes,
   Route,
 } from "react-router-dom";
 import { getFuncs} from "./utils/fetchUtils";
-import { postSignup } from './utils/userUtils'
-
-
-
-// ***Considering stashing this in a separate file
-const themeLight = createTheme({
-  palette: {
-    type: 'light',
-    primary: {
-      main: '#3f51b5',
-    },
-    secondary: {
-      main: '#9ccc65',
-    },
-    info: {
-      main: '#2196f3',
-    },
-  }
-});
-
-const themeDark = createTheme({
-  palette: {
-    type: 'dark',
-    // mode: 'dark',
-    primary: {
-      main: '#8bc34a',
-    },
-    secondary: {
-      main: '#124116',
-    },
-    info: {
-      main: '#2196f3',
-    },
-  }
-});
-
-// old state [{}, {},  {}]
-// new state = oldstate.map(
-  // if function not being updated, return function
-  // if it is being updated
-  // updatedFunc = {
-  //   ...oldFunc
-  //   timestamps: new timestamps from DB + existing ones
-  //   values: new values from DB + existing ones
-  // }
-//)
-// find index of funcion in old state fnInd
-// oldState[fnInd].metrics.Invocations.values = new + old values
+import { postSignup } from './utils/userUtils';
+import { v4 as uuidv4 } from 'uuid';
 
 const App = () => {
-  
-  // const [accessId, setAccessId]
-  // const [secretKey, setSecretKey]
+
   const [user, setUser] = useState('');
   const handleUserCreate = (event) => {
     const {
@@ -108,6 +61,8 @@ const App = () => {
     setRegion(value)
   }
   const [creds, setCreds] = useState({});
+  const [EXTERNAL_ID, setExternalId] = useState(uuidv4());
+
   //the creds object will look like : 
   /**
    * creds: 
@@ -127,6 +82,10 @@ const App = () => {
   const [functionData, setFunctionData] = useState({});
   // 
   //const [logData, setLogData] = useState([]);
+  useEffect(() => {
+    setExternalId(uuidv4())
+  }, []);
+
   useEffect(() => {
     //setLogin(false);
     const sessionLogin = JSON.parse(window.sessionStorage.getItem('LOGIN'));
@@ -150,14 +109,8 @@ const App = () => {
 
   useEffect(() => {
     if(signup){
-      postSignup(user, pass, arn, region)
+      postSignup(user, pass, arn, region, EXTERNAL_ID)
     }}, [signup]);
-  // useEffect(() => {
-  //   console.log(functionData)
-  // }, [functionData]);
-  // useEffect(() => {
-  //   if(functionData.length > 0) setFunctionNames(functionData.map(func => func.functionName));
-  // }, [functionData]);
 
 /**
  * func: {
@@ -172,10 +125,6 @@ const App = () => {
     <>
       <ThemeProvider theme={ themeDark }>
         <CssBaseline />
-        {/* <AppBar>
-          <h5>home</h5>
-        </AppBar> */}
-        {/* <Lobby /> */}
         <Routes>
           <Route path="/" 
           element=
@@ -204,6 +153,7 @@ const App = () => {
           handleRegionCreate={handleRegionCreate} 
           goSignup={goSignup} 
           setGoSignup={setGoSignup}
+          EXTERNAL_ID={EXTERNAL_ID}
           // verified={verified}
           // setVerified={setVerified}
           />} 

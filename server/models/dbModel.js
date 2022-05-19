@@ -25,6 +25,7 @@ mongoose.connect(MONGO_URI, {
     password: { type: String, required: true },
     arn: { type: String, required: true },
     region: { type: String, default: 'us-east-2', required: true },
+    externalId: { type: String, required: true }
   });
 
 userSchema.pre('save', function(next){

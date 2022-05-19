@@ -9,7 +9,7 @@ metricController.getMetrics = async (req, res, next) => {
     //pull variables off of req.body
     //funcs and metrics will be arrays
     const { start, end, funcs, metrics, creds } = req.body;
-    
+    console.log('CREDS IN METRIC CONTROLLER', creds)
     //create an object that will represent each function with a unique key
     //we will use this to make parsing through our data more seamless
     const funcObj = {};
